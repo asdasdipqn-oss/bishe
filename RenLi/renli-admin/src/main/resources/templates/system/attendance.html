@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <title>考勤管理</title>
+    <link th:href="@{/favicon.ico}" rel="shortcut icon"/>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/style.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/skins.css?v=20200902}" rel="stylesheet"/>
+</head>
+<body class="gray-bg">
+<div class="wrapper">
+    <!-- 头部 -->
+    <div class="row border-bottom white-bg dashboard-header">
+        <div class="col-xs-12" style="padding-left: 20px;">
+            <span style="font-size: 20px; font-weight: bold;">考勤管理</span>
+        </div>
+        <div class="col-xs-2" style="text-align: right;">
+            <button class="btn btn-info" onclick="window.parent.location.reload()">
+                <i class="fa fa-refresh"></i> 返回
+            </button>
+        </div>
+    </div>
+
+    <!-- 主体内容 -->
+    <div class="row" style="margin-top: 10px;">
+        <!-- 左侧：跳转8080打卡服务 -->
+        <div class="col-md-5">
+            <div class="box box-main">
+                <div class="box-header">
+                    <i class="fa fa-hand-pointer-o"></i>
+                    <span class="box-title">打卡服务</span>
+                </div>
+                <div class="box-body">
+                    <div class="text-center" style="padding: 40px 0;">
+                        <button class="btn btn-primary btn-lg" style="width: 200px;" onclick="goTo8080()">
+                            <i class="fa fa-location-arrow"></i>&nbsp;前往打卡
+                        </button>
+                    </div>
+                    <p class="text-center text-muted" style="margin-top: 20px;">
+                        点击上方按钮跳转到8080端口打卡服务
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧：打卡记录列表 -->
+        <div class="col-md-7">
+            <div class="box box-main">
+                <div class="box-header">
+                    <i class="fa fa-list"></i>
+                    <span class="box-title">打卡记录</span>
+                </div>
+                <div class="box-body">
+                    <!-- 搜索条件 -->
+                    <div class="form-group">
+                        <label>用户名：</label>
+                        <input type="text" id="username" class="form-control" placeholder="输入用户名"/>
+                    </div>
+                    <div class="form-group">
+                        <label>日期范围：</label>
+                        <div class="input-group">
+                            <input type="date" id="startDate" class="form-control" placeholder="开始日期"/>
+                            <span class="input-group-addon">至</span>
+                            <input type="date" id="endDate" class="form-control" placeholder="结束日期"/>
+                        </div>
+                    </div>
+                    <div class="text-center" style="margin-top: 15px;">
+                        <button class="btn btn-primary" onclick="searchRecords()">
+                            <i class="fa fa-search"></i>&nbsp;查询
+                        </button>
+                        <button class="btn btn-default" onclick="refreshRecords()">
+                            <i class="fa fa-refresh"></i>&nbsp;刷新
+                        </button>
+                    </div>
+
+                    <!-- 打卡记录表格 -->
+                    <table class="table table-bordered table-hover" id="attendanceTable" style="margin-top: 20px;">
+                        <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>用户名</th>
+                                <th>打卡时间</th>
+                                <th>体温</th>
+                                <th>地址</th>
+                                <th>打卡日期</th>
+                            </tr>
+                        </thead>
+                        <tbody id="attendanceBody">
+                            <tr>
+                                <td colspan="5" class="text-center">点击刷新按钮加载打卡记录</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 底部 -->
+<div th:include="include :: footer"></div>
+
+<!-- JS部分 -->
+<script th:inline="javascript">
+    var ctx = [[@{/}]];
+
+    // 跳转8080打卡服务
+    function goTo8080() {
+        window.open('http://localhost:8080', '_blank');
+    }
+
+    // 查询打卡记录（从8088服务同步）
+    function searchRecords() {
+        var username = $('#username').val();
+        var startDate = $('#startDate').val();
+        var endDate = $('#endDate').val();
+
+        var params = {};
+        if (username) {
+            params.username = username;
+        }
+        if (startDate && endDate) {
+            params.startTime = startDate;
+            params.endTime = endDate;
+        }
+
+        $.get(ctx + 'signinfo/data', { params: params }, function(result) {
+            if (result.code === 200 && result.data) {
+                renderTable(result.data);
+            } else {
+                $.modal.msg('查询失败：' + (result.msg || '未知错误'), '提示', {icon: 2});
+            }
+        }).fail(function() {
+            $.modal.msg('查询失败，请检查8080服务是否启动', '提示', {icon: 2});
+        });
+    }
+
+    // 刷新打卡记录
+    function refreshRecords() {
+        searchRecords();
+    }
+
+    // 渲染表格
+    function renderTable(data) {
+        var html = '';
+        if (data && data.length > 0) {
+            for (var i = 0; i < data.length; i++) {
+                var item = data[i];
+                html += '<tr>';
+                html += '<td>' + (i + 1) + '</td>';
+                html += '<td>' + (item.username || '-') + '</td>';
+                html += '<td>' + (item.date || '-') + '</td>';
+                html += '<td>' + (item.temperature || '-') + '</td>';
+                html += '<td>' + (item.address || '-') + '</td>';
+                html += '</tr>';
+            }
+        } else {
+            html += '<tr><td colspan="5" class="text-center text-muted">暂无打卡记录</td></tr>';
+        }
+        $('#attendanceBody').html(html);
+    }
+
+    // 页面加载时自动刷新
+    $(function() {
+        searchRecords();
+    });
+</script>
+</body>
+</html>

@@ -15,8 +15,7 @@
           </el-input>
         </el-form-item>
         <el-form-item label="时间" prop="temperature">
-          <el-input placeholder="请输入您的时间" style="width: 300px" v-model="mapLocation.temperature" prop="temperature">
-            <!-- <template slot="append">℃</template> -->
+          <el-input placeholder="自动获取当前时间" style="width: 300px" v-model="mapLocation.temperature" disabled>
           </el-input>
         </el-form-item>
         <el-form-item label="打卡日期" prop="date">
@@ -60,17 +59,6 @@ export default {
     BaiduMap
   },
   data() {
-    var checkAge = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error('请输入您的时间'));
-      }
-      if (value < 36 || value > 44) {
-        callback(new Error('时间异常！'));
-      } else {
-        callback();
-      }
-
-    };
     return {
       mapZoom: 15,
       mapCenter: {lng: 0, lat: 0},
@@ -81,9 +69,6 @@ export default {
         temperature: '',
       },
       rules: {
-        temperature: [
-          {validator: checkAge, required: true, trigger: 'blur'}
-        ],
         date: [
           {required: true, message: '请选择日期', trigger: 'blur'}
         ],
@@ -97,6 +82,19 @@ export default {
     showUsername() {
       return Cookies.get("username")
     }
+  },
+  mounted() {
+    // 自动获取当前系统时间
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    this.mapLocation.temperature = `${hours}:${minutes}:${seconds}`;
+    // 自动获取当前日期
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    this.mapLocation.date = `${year}-${month}-${day}`;
   },
   methods: {
     handlerBMap({BMap, map}) {

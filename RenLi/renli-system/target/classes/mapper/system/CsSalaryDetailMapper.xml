@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.renli.system.mapper.CsSalaryDetailMapper">
+    
+    <resultMap type="CsSalaryDetail" id="CsSalaryDetailResult">
+        <result property="id"    column="id"    />
+        <result property="employee"    column="employee"    />
+        <result property="dept"    column="dept"    />
+        <result property="salaryMonth"    column="salary_month"    />
+        <result property="baseSalary"    column="base_salary"    />
+        <result property="performanceBonus"    column="performance_bonus"    />
+        <result property="overtimePay"    column="overtime_pay"    />
+        <result property="deduction"    column="deduction"    />
+        <result property="netSalary"    column="net_salary"    />
+        <result property="detailInfo"    column="detail_info"    />
+    </resultMap>
+
+    <sql id="selectCsSalaryDetailVo">
+        select id, employee, dept, salary_month, base_salary, performance_bonus, overtime_pay, deduction, net_salary, detail_info from cs_salary_detail 
+    </sql>
+
+    <select id="selectCsSalaryDetailList" parameterType="CsSalaryDetail" resultMap="CsSalaryDetailResult">
+        <include refid="selectCsSalaryDetailVo"/>
+        <where>  
+            <if test="employee != null  and employee != ''"> and employee = #{employee}</if>
+            <if test="dept != null  and dept != ''"> and dept = #{dept}</if>
+            <if test="salaryMonth != null  and salaryMonth != ''"> and salary_month = #{salaryMonth}</if>
+            <if test="baseSalary != null "> and base_salary = #{baseSalary}</if>
+            <if test="performanceBonus != null "> and performance_bonus = #{performanceBonus}</if>
+            <if test="overtimePay != null "> and overtime_pay = #{overtimePay}</if>
+            <if test="deduction != null "> and deduction = #{deduction}</if>
+            <if test="netSalary != null "> and net_salary = #{netSalary}</if>
+            <if test="detailInfo != null  and detailInfo != ''"> and detail_info = #{detailInfo}</if>
+        </where>
+        order by id desc
+    </select>
+    
+    <select id="selectCsSalaryDetailById" parameterType="Long" resultMap="CsSalaryDetailResult">
+        <include refid="selectCsSalaryDetailVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCsSalaryDetail" parameterType="CsSalaryDetail" useGeneratedKeys="true" keyProperty="id">
+        insert into cs_salary_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="employee != null and employee != ''">employee,</if>
+            <if test="dept != null and dept != ''">dept,</if>
+            <if test="salaryMonth != null and salaryMonth != ''">salary_month,</if>
+            <if test="baseSalary != null">base_salary,</if>
+            <if test="performanceBonus != null">performance_bonus,</if>
+            <if test="overtimePay != null">overtime_pay,</if>
+            <if test="deduction != null">deduction,</if>
+            <if test="netSalary != null">net_salary,</if>
+            <if test="detailInfo != null">detail_info,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="employee != null and employee != ''">#{employee},</if>
+            <if test="dept != null and dept != ''">#{dept},</if>
+            <if test="salaryMonth != null and salaryMonth != ''">#{salaryMonth},</if>
+            <if test="baseSalary != null">#{baseSalary},</if>
+            <if test="performanceBonus != null">#{performanceBonus},</if>
+            <if test="overtimePay != null">#{overtimePay},</if>
+            <if test="deduction != null">#{deduction},</if>
+            <if test="netSalary != null">#{netSalary},</if>
+            <if test="detailInfo != null">#{detailInfo},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCsSalaryDetail" parameterType="CsSalaryDetail">
+        update cs_salary_detail
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="employee != null and employee != ''">employee = #{employee},</if>
+            <if test="dept != null and dept != ''">dept = #{dept},</if>
+            <if test="salaryMonth != null and salaryMonth != ''">salary_month = #{salaryMonth},</if>
+            <if test="baseSalary != null">base_salary = #{baseSalary},</if>
+            <if test="performanceBonus != null">performance_bonus = #{performanceBonus},</if>
+            <if test="overtimePay != null">overtime_pay = #{overtimePay},</if>
+            <if test="deduction != null">deduction = #{deduction},</if>
+            <if test="netSalary != null">net_salary = #{netSalary},</if>
+            <if test="detailInfo != null">detail_info = #{detailInfo},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCsSalaryDetailById" parameterType="Long">
+        delete from cs_salary_detail where id = #{id}
+    </delete>
+
+    <delete id="deleteCsSalaryDetailByIds" parameterType="String">
+        delete from cs_salary_detail where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

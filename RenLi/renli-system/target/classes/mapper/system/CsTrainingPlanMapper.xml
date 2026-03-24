@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.renli.system.mapper.CsTrainingPlanMapper">
+    
+    <resultMap type="CsTrainingPlan" id="CsTrainingPlanResult">
+        <result property="id"    column="id"    />
+        <result property="titleId"    column="title_id"    />
+        <result property="planName"    column="plan_name"    />
+        <result property="deptTarget"    column="dept_target"    />
+        <result property="trainingContent"    column="training_content"    />
+        <result property="startDate"    column="start_date"    />
+        <result property="endDate"    column="end_date"    />
+    </resultMap>
+
+    <sql id="selectCsTrainingPlanVo">
+        select id, title_id, plan_name, dept_target, training_content, start_date, end_date from cs_training_plan 
+    </sql>
+
+    <select id="selectCsTrainingPlanList" parameterType="CsTrainingPlan" resultMap="CsTrainingPlanResult">
+        <include refid="selectCsTrainingPlanVo"/>
+        <where>  
+            <if test="titleId != null  and titleId != ''"> and title_id = #{titleId}</if>
+            <if test="planName != null  and planName != ''"> and plan_name like concat('%', #{planName}, '%')</if>
+            <if test="deptTarget != null  and deptTarget != ''"> and dept_target = #{deptTarget}</if>
+            <if test="trainingContent != null  and trainingContent != ''"> and training_content = #{trainingContent}</if>
+            <if test="startDate != null "> and start_date = #{startDate}</if>
+            <if test="endDate != null "> and end_date = #{endDate}</if>
+        </where>
+        order by id desc
+    </select>
+    
+    <select id="selectCsTrainingPlanById" parameterType="Long" resultMap="CsTrainingPlanResult">
+        <include refid="selectCsTrainingPlanVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCsTrainingPlan" parameterType="CsTrainingPlan" useGeneratedKeys="true" keyProperty="id">
+        insert into cs_training_plan
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="titleId != null and titleId != ''">title_id,</if>
+            <if test="planName != null and planName != ''">plan_name,</if>
+            <if test="deptTarget != null">dept_target,</if>
+            <if test="trainingContent != null and trainingContent != ''">training_content,</if>
+            <if test="startDate != null">start_date,</if>
+            <if test="endDate != null">end_date,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="titleId != null and titleId != ''">#{titleId},</if>
+            <if test="planName != null and planName != ''">#{planName},</if>
+            <if test="deptTarget != null">#{deptTarget},</if>
+            <if test="trainingContent != null and trainingContent != ''">#{trainingContent},</if>
+            <if test="startDate != null">#{startDate},</if>
+            <if test="endDate != null">#{endDate},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCsTrainingPlan" parameterType="CsTrainingPlan">
+        update cs_training_plan
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="titleId != null and titleId != ''">title_id = #{titleId},</if>
+            <if test="planName != null and planName != ''">plan_name = #{planName},</if>
+            <if test="deptTarget != null">dept_target = #{deptTarget},</if>
+            <if test="trainingContent != null and trainingContent != ''">training_content = #{trainingContent},</if>
+            <if test="startDate != null">start_date = #{startDate},</if>
+            <if test="endDate != null">end_date = #{endDate},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCsTrainingPlanById" parameterType="Long">
+        delete from cs_training_plan where id = #{id}
+    </delete>
+
+    <delete id="deleteCsTrainingPlanByIds" parameterType="String">
+        delete from cs_training_plan where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.renli.system.mapper.CsAttendanceYgexceptionMapper">
+    
+    <resultMap type="CsAttendanceYgexception" id="CsAttendanceYgexceptionResult">
+        <result property="id"    column="id"    />
+        <result property="employee"    column="employee"    />
+        <result property="dept"    column="dept"    />
+        <result property="exceptionDate"    column="exception_date"    />
+        <result property="explanation"    column="explanation"    />
+        <result property="exceptionStatus"    column="exception_status"    />
+    </resultMap>
+
+    <sql id="selectCsAttendanceYgexceptionVo">
+        select id, employee, dept, exception_date, explanation, exception_status from cs_attendance_jlexception 
+    </sql>
+
+    <select id="selectCsAttendanceYgexceptionList" parameterType="CsAttendanceYgexception" resultMap="CsAttendanceYgexceptionResult">
+        <include refid="selectCsAttendanceYgexceptionVo"/>
+        <where>  
+            <if test="employee != null  and employee != ''"> and employee = #{employee}</if>
+            <if test="dept != null  and dept != ''"> and dept = #{dept}</if>
+            <if test="exceptionDate != null "> and exception_date = #{exceptionDate}</if>
+            <if test="explanation != null  and explanation != ''"> and explanation = #{explanation}</if>
+            <if test="exceptionStatus != null  and exceptionStatus != ''"> and exception_status = #{exceptionStatus}</if>
+        </where>
+        order by id desc
+    </select>
+    
+    <select id="selectCsAttendanceYgexceptionById" parameterType="Long" resultMap="CsAttendanceYgexceptionResult">
+        <include refid="selectCsAttendanceYgexceptionVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCsAttendanceYgexception" parameterType="CsAttendanceYgexception" useGeneratedKeys="true" keyProperty="id">
+        insert into cs_attendance_jlexception
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="employee != null and employee != ''">employee,</if>
+            <if test="dept != null and dept != ''">dept,</if>
+            <if test="exceptionDate != null">exception_date,</if>
+            <if test="explanation != null">explanation,</if>
+            <if test="exceptionStatus != null">exception_status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="employee != null and employee != ''">#{employee},</if>
+            <if test="dept != null and dept != ''">#{dept},</if>
+            <if test="exceptionDate != null">#{exceptionDate},</if>
+            <if test="explanation != null">#{explanation},</if>
+            <if test="exceptionStatus != null">#{exceptionStatus},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCsAttendanceYgexception" parameterType="CsAttendanceYgexception">
+        update cs_attendance_jlexception
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="employee != null and employee != ''">employee = #{employee},</if>
+            <if test="dept != null and dept != ''">dept = #{dept},</if>
+            <if test="exceptionDate != null">exception_date = #{exceptionDate},</if>
+            <if test="explanation != null">explanation = #{explanation},</if>
+            <if test="exceptionStatus != null">exception_status = #{exceptionStatus},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCsAttendanceYgexceptionById" parameterType="Long">
+        delete from cs_attendance_jlexception where id = #{id}
+    </delete>
+
+    <delete id="deleteCsAttendanceYgexceptionByIds" parameterType="String">
+        delete from cs_attendance_jlexception where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.renli.system.mapper.CsEvaluationResultMapper">
+    
+    <resultMap type="CsEvaluationResult" id="CsEvaluationResultResult">
+        <result property="id"    column="id"    />
+        <result property="employee"    column="employee"    />
+        <result property="titleId"    column="title_id"    />
+        <result property="evalPeriod"    column="eval_period"    />
+        <result property="score"    column="score"    />
+        <result property="comment"    column="comment"    />
+    </resultMap>
+
+    <sql id="selectCsEvaluationResultVo">
+        select id, employee, title_id, eval_period, score, comment from cs_evaluation_result 
+    </sql>
+
+    <select id="selectCsEvaluationResultList" parameterType="CsEvaluationResult" resultMap="CsEvaluationResultResult">
+        <include refid="selectCsEvaluationResultVo"/>
+        <where>  
+            <if test="employee != null  and employee != ''"> and employee = #{employee}</if>
+            <if test="titleId != null  and titleId != ''"> and title_id = #{titleId}</if>
+            <if test="evalPeriod != null  and evalPeriod != ''"> and eval_period = #{evalPeriod}</if>
+            <if test="score != null "> and score = #{score}</if>
+            <if test="comment != null  and comment != ''"> and comment = #{comment}</if>
+        </where>
+        order by id desc
+    </select>
+    
+    <select id="selectCsEvaluationResultById" parameterType="Long" resultMap="CsEvaluationResultResult">
+        <include refid="selectCsEvaluationResultVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCsEvaluationResult" parameterType="CsEvaluationResult" useGeneratedKeys="true" keyProperty="id">
+        insert into cs_evaluation_result
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="employee != null and employee != ''">employee,</if>
+            <if test="titleId != null and titleId != ''">title_id,</if>
+            <if test="evalPeriod != null and evalPeriod != ''">eval_period,</if>
+            <if test="score != null">score,</if>
+            <if test="comment != null">comment,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="employee != null and employee != ''">#{employee},</if>
+            <if test="titleId != null and titleId != ''">#{titleId},</if>
+            <if test="evalPeriod != null and evalPeriod != ''">#{evalPeriod},</if>
+            <if test="score != null">#{score},</if>
+            <if test="comment != null">#{comment},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCsEvaluationResult" parameterType="CsEvaluationResult">
+        update cs_evaluation_result
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="employee != null and employee != ''">employee = #{employee},</if>
+            <if test="titleId != null and titleId != ''">title_id = #{titleId},</if>
+            <if test="evalPeriod != null and evalPeriod != ''">eval_period = #{evalPeriod},</if>
+            <if test="score != null">score = #{score},</if>
+            <if test="comment != null">comment = #{comment},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCsEvaluationResultById" parameterType="Long">
+        delete from cs_evaluation_result where id = #{id}
+    </delete>
+
+    <delete id="deleteCsEvaluationResultByIds" parameterType="String">
+        delete from cs_evaluation_result where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

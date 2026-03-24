@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.renli.system.mapper.CsRecruitmentPostMapper">
+    
+    <resultMap type="CsRecruitmentPost" id="CsRecruitmentPostResult">
+        <result property="id"    column="id"    />
+        <result property="positionName"    column="position_name"    />
+        <result property="department"    column="department"    />
+        <result property="workLocation"    column="work_location"    />
+        <result property="jobDescription"    column="job_description"    />
+        <result property="requirements"    column="requirements"    />
+        <result property="postStatus"    column="post_status"    />
+    </resultMap>
+
+    <sql id="selectCsRecruitmentPostVo">
+        select id, position_name, department, work_location, job_description, requirements, post_status from cs_recruitment_post 
+    </sql>
+
+    <select id="selectCsRecruitmentPostList" parameterType="CsRecruitmentPost" resultMap="CsRecruitmentPostResult">
+        <include refid="selectCsRecruitmentPostVo"/>
+        <where>  
+            <if test="positionName != null  and positionName != ''"> and position_name like concat('%', #{positionName}, '%')</if>
+            <if test="department != null  and department != ''"> and department = #{department}</if>
+            <if test="workLocation != null  and workLocation != ''"> and work_location = #{workLocation}</if>
+            <if test="jobDescription != null  and jobDescription != ''"> and job_description = #{jobDescription}</if>
+            <if test="requirements != null  and requirements != ''"> and requirements = #{requirements}</if>
+            <if test="postStatus != null  and postStatus != ''"> and post_status = #{postStatus}</if>
+        </where>
+        order by id desc
+    </select>
+    
+    <select id="selectCsRecruitmentPostById" parameterType="Long" resultMap="CsRecruitmentPostResult">
+        <include refid="selectCsRecruitmentPostVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCsRecruitmentPost" parameterType="CsRecruitmentPost" useGeneratedKeys="true" keyProperty="id">
+        insert into cs_recruitment_post
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="positionName != null and positionName != ''">position_name,</if>
+            <if test="department != null and department != ''">department,</if>
+            <if test="workLocation != null">work_location,</if>
+            <if test="jobDescription != null">job_description,</if>
+            <if test="requirements != null">requirements,</if>
+            <if test="postStatus != null">post_status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="positionName != null and positionName != ''">#{positionName},</if>
+            <if test="department != null and department != ''">#{department},</if>
+            <if test="workLocation != null">#{workLocation},</if>
+            <if test="jobDescription != null">#{jobDescription},</if>
+            <if test="requirements != null">#{requirements},</if>
+            <if test="postStatus != null">#{postStatus},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCsRecruitmentPost" parameterType="CsRecruitmentPost">
+        update cs_recruitment_post
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="positionName != null and positionName != ''">position_name = #{positionName},</if>
+            <if test="department != null and department != ''">department = #{department},</if>
+            <if test="workLocation != null">work_location = #{workLocation},</if>
+            <if test="jobDescription != null">job_description = #{jobDescription},</if>
+            <if test="requirements != null">requirements = #{requirements},</if>
+            <if test="postStatus != null">post_status = #{postStatus},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCsRecruitmentPostById" parameterType="Long">
+        delete from cs_recruitment_post where id = #{id}
+    </delete>
+
+    <delete id="deleteCsRecruitmentPostByIds" parameterType="String">
+        delete from cs_recruitment_post where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

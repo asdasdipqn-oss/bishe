@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.renli.system.mapper.CsWelfareInfoMapper">
+    
+    <resultMap type="CsWelfareInfo" id="CsWelfareInfoResult">
+        <result property="id"    column="id"    />
+        <result property="employee"    column="employee"    />
+        <result property="welfareType"    column="welfare_type"    />
+        <result property="money"    column="money"    />
+        <result property="description"    column="description"    />
+    </resultMap>
+
+    <sql id="selectCsWelfareInfoVo">
+        select id, employee, welfare_type, money, description from cs_welfare_info
+    </sql>
+
+    <select id="selectCsWelfareInfoList" parameterType="CsWelfareInfo" resultMap="CsWelfareInfoResult">
+        <include refid="selectCsWelfareInfoVo"/>
+        <where>  
+            <if test="employee != null  and employee != ''"> and employee = #{employee}</if>
+            <if test="welfareType != null  and welfareType != ''"> and welfare_type = #{welfareType}</if>
+            <if test="money != null "> and money = #{money}</if>
+            <if test="description != null  and description != ''"> and description = #{description}</if>
+        </where>
+        order by id desc
+    </select>
+    
+    <select id="selectCsWelfareInfoById" parameterType="Long" resultMap="CsWelfareInfoResult">
+        <include refid="selectCsWelfareInfoVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCsWelfareInfo" parameterType="CsWelfareInfo" useGeneratedKeys="true" keyProperty="id">
+        insert into cs_welfare_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="employee != null and employee != ''">employee,</if>
+            <if test="welfareType != null and welfareType != ''">welfare_type,</if>
+            <if test="money != null">money,</if>
+            <if test="description != null">description,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="employee != null and employee != ''">#{employee},</if>
+            <if test="welfareType != null and welfareType != ''">#{welfareType},</if>
+            <if test="money != null">#{money},</if>
+            <if test="description != null">#{description},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCsWelfareInfo" parameterType="CsWelfareInfo">
+        update cs_welfare_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="employee != null and employee != ''">employee = #{employee},</if>
+            <if test="welfareType != null and welfareType != ''">welfare_type = #{welfareType},</if>
+            <if test="money != null">money = #{money},</if>
+            <if test="description != null">description = #{description},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCsWelfareInfoById" parameterType="Long">
+        delete from cs_welfare_info where id = #{id}
+    </delete>
+
+    <delete id="deleteCsWelfareInfoByIds" parameterType="String">
+        delete from cs_welfare_info where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

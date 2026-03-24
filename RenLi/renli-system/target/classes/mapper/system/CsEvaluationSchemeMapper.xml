@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.renli.system.mapper.CsEvaluationSchemeMapper">
+    
+    <resultMap type="CsEvaluationScheme" id="CsEvaluationSchemeResult">
+        <result property="id"    column="id"    />
+        <result property="titleId"    column="title_id"    />
+        <result property="schemeName"    column="scheme_name"    />
+        <result property="evalPeriod"    column="eval_period"    />
+        <result property="criteria"    column="criteria"    />
+    </resultMap>
+
+    <sql id="selectCsEvaluationSchemeVo">
+        select id, title_id, scheme_name, eval_period, criteria from cs_evaluation_scheme 
+    </sql>
+
+    <select id="selectCsEvaluationSchemeList" parameterType="CsEvaluationScheme" resultMap="CsEvaluationSchemeResult">
+        <include refid="selectCsEvaluationSchemeVo"/>
+        <where>  
+            <if test="titleId != null  and titleId != ''"> and title_id = #{titleId}</if>
+            <if test="schemeName != null  and schemeName != ''"> and scheme_name like concat('%', #{schemeName}, '%')</if>
+            <if test="evalPeriod != null  and evalPeriod != ''"> and eval_period = #{evalPeriod}</if>
+            <if test="criteria != null  and criteria != ''"> and criteria = #{criteria}</if>
+        </where>
+        order by id desc
+    </select>
+    
+    <select id="selectCsEvaluationSchemeById" parameterType="Long" resultMap="CsEvaluationSchemeResult">
+        <include refid="selectCsEvaluationSchemeVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCsEvaluationScheme" parameterType="CsEvaluationScheme" useGeneratedKeys="true" keyProperty="id">
+        insert into cs_evaluation_scheme
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="titleId != null and titleId != ''">title_id,</if>
+            <if test="schemeName != null and schemeName != ''">scheme_name,</if>
+            <if test="evalPeriod != null and evalPeriod != ''">eval_period,</if>
+            <if test="criteria != null">criteria,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="titleId != null and titleId != ''">#{titleId},</if>
+            <if test="schemeName != null and schemeName != ''">#{schemeName},</if>
+            <if test="evalPeriod != null and evalPeriod != ''">#{evalPeriod},</if>
+            <if test="criteria != null">#{criteria},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCsEvaluationScheme" parameterType="CsEvaluationScheme">
+        update cs_evaluation_scheme
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="titleId != null and titleId != ''">title_id = #{titleId},</if>
+            <if test="schemeName != null and schemeName != ''">scheme_name = #{schemeName},</if>
+            <if test="evalPeriod != null and evalPeriod != ''">eval_period = #{evalPeriod},</if>
+            <if test="criteria != null">criteria = #{criteria},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCsEvaluationSchemeById" parameterType="Long">
+        delete from cs_evaluation_scheme where id = #{id}
+    </delete>
+
+    <delete id="deleteCsEvaluationSchemeByIds" parameterType="String">
+        delete from cs_evaluation_scheme where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

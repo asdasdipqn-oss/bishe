@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.renli.system.mapper.CsAttendanceRuleMapper">
+    
+    <resultMap type="CsAttendanceRule" id="CsAttendanceRuleResult">
+        <result property="id"    column="id"    />
+        <result property="ruleName"    column="rule_name"    />
+        <result property="ruleDetails"    column="rule_details"    />
+        <result property="applicableDept"    column="applicable_dept"    />
+        <result property="effectiveDate"    column="effective_date"    />
+    </resultMap>
+
+    <sql id="selectCsAttendanceRuleVo">
+        select id, rule_name, rule_details, applicable_dept, effective_date from cs_attendance_rule 
+    </sql>
+
+    <select id="selectCsAttendanceRuleList" parameterType="CsAttendanceRule" resultMap="CsAttendanceRuleResult">
+        <include refid="selectCsAttendanceRuleVo"/>
+        <where>  
+            <if test="ruleName != null  and ruleName != ''"> and rule_name like concat('%', #{ruleName}, '%')</if>
+            <if test="ruleDetails != null  and ruleDetails != ''"> and rule_details = #{ruleDetails}</if>
+            <if test="applicableDept != null  and applicableDept != ''"> and applicable_dept = #{applicableDept}</if>
+            <if test="effectiveDate != null "> and effective_date = #{effectiveDate}</if>
+        </where>
+        order by id desc
+    </select>
+    
+    <select id="selectCsAttendanceRuleById" parameterType="Long" resultMap="CsAttendanceRuleResult">
+        <include refid="selectCsAttendanceRuleVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCsAttendanceRule" parameterType="CsAttendanceRule" useGeneratedKeys="true" keyProperty="id">
+        insert into cs_attendance_rule
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ruleName != null and ruleName != ''">rule_name,</if>
+            <if test="ruleDetails != null and ruleDetails != ''">rule_details,</if>
+            <if test="applicableDept != null">applicable_dept,</if>
+            <if test="effectiveDate != null">effective_date,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="ruleName != null and ruleName != ''">#{ruleName},</if>
+            <if test="ruleDetails != null and ruleDetails != ''">#{ruleDetails},</if>
+            <if test="applicableDept != null">#{applicableDept},</if>
+            <if test="effectiveDate != null">#{effectiveDate},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCsAttendanceRule" parameterType="CsAttendanceRule">
+        update cs_attendance_rule
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="ruleName != null and ruleName != ''">rule_name = #{ruleName},</if>
+            <if test="ruleDetails != null and ruleDetails != ''">rule_details = #{ruleDetails},</if>
+            <if test="applicableDept != null">applicable_dept = #{applicableDept},</if>
+            <if test="effectiveDate != null">effective_date = #{effectiveDate},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCsAttendanceRuleById" parameterType="Long">
+        delete from cs_attendance_rule where id = #{id}
+    </delete>
+
+    <delete id="deleteCsAttendanceRuleByIds" parameterType="String">
+        delete from cs_attendance_rule where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

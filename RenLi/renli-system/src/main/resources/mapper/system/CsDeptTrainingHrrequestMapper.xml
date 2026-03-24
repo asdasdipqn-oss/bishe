@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.renli.system.mapper.CsDeptTrainingHrrequestMapper">
+    
+    <resultMap type="CsDeptTrainingHrrequest" id="CsDeptTrainingHrrequestResult">
+        <result property="id"    column="id"    />
+        <result property="titleId"    column="title_id"    />
+        <result property="deptName"    column="dept_name"    />
+        <result property="requestBy"    column="request_by"    />
+        <result property="trainingTopic"    column="training_topic"    />
+        <result property="reason"    column="reason"    />
+        <result property="expectedTime"    column="expected_time"    />
+        <result property="requestStatus"    column="request_status"    />
+    </resultMap>
+
+    <sql id="selectCsDeptTrainingHrrequestVo">
+        select id, title_id, dept_name, request_by, training_topic, reason, expected_time, request_status from cs_dept_training_hrrequest 
+    </sql>
+
+    <select id="selectCsDeptTrainingHrrequestList" parameterType="CsDeptTrainingHrrequest" resultMap="CsDeptTrainingHrrequestResult">
+        <include refid="selectCsDeptTrainingHrrequestVo"/>
+        <where>  
+            <if test="titleId != null  and titleId != ''"> and title_id = #{titleId}</if>
+            <if test="deptName != null  and deptName != ''"> and dept_name like concat('%', #{deptName}, '%')</if>
+            <if test="requestBy != null  and requestBy != ''"> and request_by = #{requestBy}</if>
+            <if test="trainingTopic != null  and trainingTopic != ''"> and training_topic = #{trainingTopic}</if>
+            <if test="reason != null  and reason != ''"> and reason = #{reason}</if>
+            <if test="expectedTime != null  and expectedTime != ''"> and expected_time = #{expectedTime}</if>
+            <if test="requestStatus != null  and requestStatus != ''"> and request_status = #{requestStatus}</if>
+        </where>
+        order by id desc
+    </select>
+    
+    <select id="selectCsDeptTrainingHrrequestById" parameterType="Long" resultMap="CsDeptTrainingHrrequestResult">
+        <include refid="selectCsDeptTrainingHrrequestVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCsDeptTrainingHrrequest" parameterType="CsDeptTrainingHrrequest" useGeneratedKeys="true" keyProperty="id">
+        insert into cs_dept_training_hrrequest
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="titleId != null">title_id,</if>
+            <if test="deptName != null and deptName != ''">dept_name,</if>
+            <if test="requestBy != null and requestBy != ''">request_by,</if>
+            <if test="trainingTopic != null and trainingTopic != ''">training_topic,</if>
+            <if test="reason != null">reason,</if>
+            <if test="expectedTime != null">expected_time,</if>
+            <if test="requestStatus != null">request_status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="titleId != null">#{titleId},</if>
+            <if test="deptName != null and deptName != ''">#{deptName},</if>
+            <if test="requestBy != null and requestBy != ''">#{requestBy},</if>
+            <if test="trainingTopic != null and trainingTopic != ''">#{trainingTopic},</if>
+            <if test="reason != null">#{reason},</if>
+            <if test="expectedTime != null">#{expectedTime},</if>
+            <if test="requestStatus != null">#{requestStatus},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCsDeptTrainingHrrequest" parameterType="CsDeptTrainingHrrequest">
+        update cs_dept_training_hrrequest
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="titleId != null">title_id = #{titleId},</if>
+            <if test="deptName != null and deptName != ''">dept_name = #{deptName},</if>
+            <if test="requestBy != null and requestBy != ''">request_by = #{requestBy},</if>
+            <if test="trainingTopic != null and trainingTopic != ''">training_topic = #{trainingTopic},</if>
+            <if test="reason != null">reason = #{reason},</if>
+            <if test="expectedTime != null">expected_time = #{expectedTime},</if>
+            <if test="requestStatus != null">request_status = #{requestStatus},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCsDeptTrainingHrrequestById" parameterType="Long">
+        delete from cs_dept_training_hrrequest where id = #{id}
+    </delete>
+
+    <delete id="deleteCsDeptTrainingHrrequestByIds" parameterType="String">
+        delete from cs_dept_training_hrrequest where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

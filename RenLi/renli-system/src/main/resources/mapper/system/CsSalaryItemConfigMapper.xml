@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.renli.system.mapper.CsSalaryItemConfigMapper">
+    
+    <resultMap type="CsSalaryItemConfig" id="CsSalaryItemConfigResult">
+        <result property="id"    column="id"    />
+        <result property="itemName"    column="item_name"    />
+        <result property="applicableDept"    column="applicable_dept"    />
+        <result property="post"    column="post"    />
+        <result property="salayDetails"    column="salay_details"    />
+    </resultMap>
+
+    <sql id="selectCsSalaryItemConfigVo"> 
+        select id, item_name, applicable_dept, post, salay_details from cs_salary_item_config order by id desc
+    </sql>
+
+    <select id="selectCsSalaryItemConfigList" parameterType="CsSalaryItemConfig" resultMap="CsSalaryItemConfigResult">
+        <include refid="selectCsSalaryItemConfigVo"/>
+        <where>  
+            <if test="itemName != null  and itemName != ''"> and item_name like concat('%', #{itemName}, '%')</if>
+            <if test="applicableDept != null  and applicableDept != ''"> and applicable_dept = #{applicableDept}</if>
+            <if test="post != null  and post != ''"> and post = #{post}</if>
+            <if test="salayDetails != null  and salayDetails != ''"> and salay_details = #{salayDetails}</if>
+        </where>
+    </select>
+    
+    <select id="selectCsSalaryItemConfigById" parameterType="Long" resultMap="CsSalaryItemConfigResult">
+        <include refid="selectCsSalaryItemConfigVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCsSalaryItemConfig" parameterType="CsSalaryItemConfig" useGeneratedKeys="true" keyProperty="id">
+        insert into cs_salary_item_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="itemName != null and itemName != ''">item_name,</if>
+            <if test="applicableDept != null">applicable_dept,</if>
+            <if test="post != null">post,</if>
+            <if test="salayDetails != null and salayDetails != ''">salay_details,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="itemName != null and itemName != ''">#{itemName},</if>
+            <if test="applicableDept != null">#{applicableDept},</if>
+            <if test="post != null">#{post},</if>
+            <if test="salayDetails != null and salayDetails != ''">#{salayDetails},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCsSalaryItemConfig" parameterType="CsSalaryItemConfig">
+        update cs_salary_item_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="itemName != null and itemName != ''">item_name = #{itemName},</if>
+            <if test="applicableDept != null">applicable_dept = #{applicableDept},</if>
+            <if test="post != null">post = #{post},</if>
+            <if test="salayDetails != null and salayDetails != ''">salay_details = #{salayDetails},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCsSalaryItemConfigById" parameterType="Long">
+        delete from cs_salary_item_config where id = #{id}
+    </delete>
+
+    <delete id="deleteCsSalaryItemConfigByIds" parameterType="String">
+        delete from cs_salary_item_config where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

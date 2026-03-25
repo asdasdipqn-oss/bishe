@@ -19,7 +19,7 @@ import com.renli.common.core.domain.AjaxResult;
 import com.renli.common.utils.poi.ExcelUtil;
 import com.renli.common.core.page.TableDataInfo;
 import com.renli.common.core.domain.entity.SysUser;
-import com.renli.common.core.domain.entity.SysRole;
+import com.renli.common.utils.DeptPermissionUtils;
 
 @Controller
 @RequestMapping("/system/info")
@@ -43,33 +43,16 @@ public class CsWelfareInfoController extends BaseController
     public TableDataInfo list(CsWelfareInfo csWelfareInfo)
     {
         SysUser currentUser = getSysUser();
-        List<SysRole> roles = currentUser.getRoles();
-        
-        boolean isNormalUser = true;
-        boolean isDeptManager = false;
-        
-        if (roles != null) {
-            for (SysRole role : roles) {
-                String roleKey = role.getRoleKey();
-                if ("jl".equals(roleKey)) {
-                    isDeptManager = true;
-                    isNormalUser = false;
-                    break;
-                }
-                else if ("admin".equals(roleKey) || "gly".equals(roleKey) || "hr".equals(roleKey)) {
-                    isNormalUser = false;
-                    break;
-                }
-            }
-        }
-        
-        if (isNormalUser) {
+        String permissionType = DeptPermissionUtils.getUserPermissionType(currentUser);
+
+        // 根据部门权限设置过滤条件
+        if (DeptPermissionUtils.isDeptUser(currentUser)) {
+            // 普通员工只能看自己的福利
             csWelfareInfo.setEmployee(currentUser.getUserName());
         }
-        else if (isDeptManager) {
-            csWelfareInfo.setEmployee(null);
-        }
-        
+        // 部门经理可以看所有福利（不设置employee过滤）
+        // 管理员也可以看所有福利
+
         startPage();
         List<CsWelfareInfo> list = csWelfareInfoService.selectCsWelfareInfoList(csWelfareInfo);
         return getDataTable(list);
@@ -82,33 +65,16 @@ public class CsWelfareInfoController extends BaseController
     public AjaxResult export(CsWelfareInfo csWelfareInfo)
     {
         SysUser currentUser = getSysUser();
-        List<SysRole> roles = currentUser.getRoles();
-        
-        boolean isNormalUser = true;
-        boolean isDeptManager = false;
-        
-        if (roles != null) {
-            for (SysRole role : roles) {
-                String roleKey = role.getRoleKey();
-                if ("jl".equals(roleKey)) {
-                    isDeptManager = true;
-                    isNormalUser = false;
-                    break;
-                }
-                else if ("admin".equals(roleKey) || "gly".equals(roleKey) || "hr".equals(roleKey)) {
-                    isNormalUser = false;
-                    break;
-                }
-            }
-        }
-        
-        if (isNormalUser) {
+        String permissionType = DeptPermissionUtils.getUserPermissionType(currentUser);
+
+        // 根据部门权限设置过滤条件
+        if (DeptPermissionUtils.isDeptUser(currentUser)) {
+            // 普通员工只能导出自己的福利
             csWelfareInfo.setEmployee(currentUser.getUserName());
         }
-        else if (isDeptManager) {
-            csWelfareInfo.setEmployee(null);
-        }
-        
+        // 部门经理可以导出所有福利（不设置employee过滤）
+        // 管理员也可以导出所有福利
+
         List<CsWelfareInfo> list = csWelfareInfoService.selectCsWelfareInfoList(csWelfareInfo);
         ExcelUtil<CsWelfareInfo> util = new ExcelUtil<CsWelfareInfo>(CsWelfareInfo.class);
         return util.exportExcel(list, "员工福利信息数据");

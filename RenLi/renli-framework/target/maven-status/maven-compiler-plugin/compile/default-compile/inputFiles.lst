@@ -1,47 +1,47 @@
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\shiro\session\OnlineSessionFactory.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\config\properties\DruidProperties.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\web\service\CacheService.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\interceptor\RepeatSubmitInterceptor.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\aspectj\DataScopeAspect.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\config\ApplicationConfig.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\config\KaptchaTextCreator.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\shiro\web\session\SpringSessionValidationScheduler.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\shiro\web\session\OnlineWebSessionManager.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\shiro\session\OnlineSession.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\shiro\service\SysRegisterService.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\web\exception\GlobalExceptionHandler.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\config\FilterConfig.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\shiro\service\SysPasswordService.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\shiro\service\SysShiroService.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\config\MyBatisConfig.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\config\ResourcesConfig.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\shiro\web\filter\online\OnlineSessionFilter.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\aspectj\DataSourceAspect.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\shiro\web\filter\captcha\CaptchaValidateFilter.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\web\domain\Server.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\shiro\web\filter\sync\SyncOnlineSessionFilter.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\web\service\DictService.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\config\I18nConfig.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\web\domain\server\Mem.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\shiro\realm\UserRealm.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\web\service\ConfigService.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\config\CaptchaConfig.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\shiro\service\SysLoginService.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\shiro\web\filter\kickout\KickoutSessionFilter.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\manager\ShutdownManager.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\shiro\session\OnlineSessionDAO.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\web\domain\server\Jvm.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\shiro\util\AuthorizationUtils.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\web\domain\server\SysFile.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\interceptor\impl\SameUrlDataInterceptor.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\web\service\PermissionService.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\manager\AsyncManager.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\datasource\DynamicDataSource.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\aspectj\LogAspect.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\config\DruidConfig.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\config\ShiroConfig.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\shiro\web\CustomShiroFilterFactoryBean.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\manager\factory\AsyncFactory.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\shiro\web\filter\LogoutFilter.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\web\domain\server\Cpu.java
-C:\cxj\ry\ry1\ry1\ruoyi-framework\src\main\java\com\ruoyi\framework\web\domain\server\Sys.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/interceptor/RepeatSubmitInterceptor.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/shiro/session/OnlineSessionDAO.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/shiro/web/filter/online/OnlineSessionFilter.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/manager/ShutdownManager.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/config/I18nConfig.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/web/domain/server/Sys.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/web/domain/server/Cpu.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/web/service/DictService.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/web/service/PermissionService.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/web/exception/GlobalExceptionHandler.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/config/ResourcesConfig.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/manager/AsyncManager.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/config/ShiroConfig.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/shiro/web/filter/sync/SyncOnlineSessionFilter.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/config/DruidConfig.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/aspectj/DataSourceAspect.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/shiro/web/filter/LogoutFilter.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/web/domain/server/Jvm.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/config/properties/DruidProperties.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/config/CaptchaConfig.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/web/domain/Server.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/shiro/service/SysRegisterService.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/shiro/session/OnlineSessionFactory.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/config/MyBatisConfig.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/shiro/web/session/SpringSessionValidationScheduler.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/shiro/web/session/OnlineWebSessionManager.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/web/service/ConfigService.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/web/service/CacheService.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/datasource/DynamicDataSource.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/aspectj/DataScopeAspect.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/shiro/service/SysLoginService.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/shiro/web/filter/kickout/KickoutSessionFilter.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/manager/factory/AsyncFactory.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/interceptor/impl/SameUrlDataInterceptor.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/shiro/util/AuthorizationUtils.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/aspectj/LogAspect.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/config/KaptchaTextCreator.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/config/FilterConfig.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/shiro/service/SysShiroService.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/config/ApplicationConfig.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/shiro/service/SysPasswordService.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/shiro/web/filter/captcha/CaptchaValidateFilter.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/shiro/web/CustomShiroFilterFactoryBean.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/shiro/session/OnlineSession.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/web/domain/server/Mem.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/shiro/realm/UserRealm.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-framework/src/main/java/com/renli/framework/web/domain/server/SysFile.java

@@ -1,104 +1,105 @@
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\core\controller\BaseController.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\core\domain\TreeEntity.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\exception\GlobalException.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\xss\XssValidator.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\config\datasource\DynamicDataSourceContextHolder.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\exception\file\FileNameLengthLimitExceededException.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\spring\SpringUtils.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\xss\XssHttpServletRequestWrapper.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\uuid\Seq.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\annotation\Excels.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\security\PermissionUtils.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\ShiroUtils.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\exception\user\UserPasswordRetryLimitExceedException.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\constant\ShiroConstants.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\file\FileUploadUtils.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\enums\OperatorType.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\exception\user\UserNotExistsException.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\exception\file\FileException.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\security\Md5Utils.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\annotation\DataSource.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\security\CipherUtils.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\MessageUtils.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\enums\OnlineStatus.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\core\domain\BaseEntity.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\poi\ExcelHandlerAdapter.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\exception\user\UserDeleteException.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\file\FileTypeUtils.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\xss\Xss.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\Threads.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\IpUtils.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\DictUtils.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\core\domain\AjaxResult.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\YamlUtil.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\core\page\TableSupport.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\annotation\Excel.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\json\JSONObject.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\core\page\TableDataInfo.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\exception\file\InvalidExtensionException.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\exception\file\FileSizeLimitExceededException.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\constant\Constants.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\constant\UserConstants.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\core\domain\R.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\core\domain\entity\SysMenu.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\core\page\PageDomain.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\xss\XssFilter.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\core\domain\CxSelect.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\core\text\Convert.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\file\FileUtils.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\CacheUtils.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\exception\DemoModeException.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\reflect\ReflectUtils.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\core\domain\entity\SysDictData.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\poi\ExcelUtil.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\core\domain\Ztree.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\json\JSON.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\core\text\StrFormatter.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\config\ServerConfig.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\constant\PermissionConstants.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\file\ImageUtils.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\exception\user\UserException.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\core\domain\entity\SysDictType.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\annotation\Log.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\LogUtils.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\StringUtils.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\enums\BusinessStatus.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\config\RuoYiConfig.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\enums\DataSourceType.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\enums\UserStatus.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\constant\ScheduleConstants.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\exception\base\BaseException.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\core\domain\entity\SysRole.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\annotation\RepeatSubmit.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\exception\ServiceException.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\exception\user\UserPasswordNotMatchException.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\exception\user\UserBlockedException.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\CookieUtils.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\sql\SqlUtil.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\Arith.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\MapDataUtil.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\html\HTMLFilter.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\ServletUtils.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\exception\user\CaptchaException.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\core\text\CharsetKit.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\bean\BeanValidators.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\html\EscapeUtil.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\config\thread\ThreadPoolConfig.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\exception\job\TaskException.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\core\domain\entity\SysUser.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\ExceptionUtil.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\bean\BeanUtils.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\file\MimeTypeUtils.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\constant\GenConstants.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\enums\BusinessType.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\exception\UtilException.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\uuid\UUID.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\exception\user\RoleBlockedException.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\uuid\IdUtils.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\annotation\DataScope.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\core\domain\entity\SysDept.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\AddressUtils.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\DateUtils.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\PageUtils.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\utils\http\HttpUtils.java
-C:\cxj\ry\ry1\ry1\ruoyi-common\src\main\java\com\ruoyi\common\exception\user\UserPasswordRetryLimitCountException.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/YamlUtil.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/exception/user/CaptchaException.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/constant/UserConstants.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/poi/ExcelUtil.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/html/EscapeUtil.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/PageUtils.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/bean/BeanUtils.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/core/domain/CxSelect.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/annotation/Excel.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/bean/BeanValidators.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/exception/user/UserNotExistsException.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/config/RuoYiConfig.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/DeptPermissionUtils.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/exception/file/InvalidExtensionException.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/constant/PermissionConstants.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/enums/UserStatus.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/exception/ServiceException.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/core/text/StrFormatter.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/annotation/RepeatSubmit.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/sql/SqlUtil.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/file/FileUploadUtils.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/DictUtils.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/core/domain/Ztree.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/AddressUtils.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/ShiroUtils.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/annotation/DataScope.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/annotation/Log.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/core/domain/AjaxResult.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/CacheUtils.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/core/domain/entity/SysDictType.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/core/domain/R.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/Arith.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/MapDataUtil.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/DateUtils.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/json/JSONObject.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/exception/file/FileSizeLimitExceededException.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/poi/ExcelHandlerAdapter.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/constant/Constants.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/exception/job/TaskException.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/enums/OnlineStatus.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/file/FileUtils.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/core/controller/BaseController.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/security/PermissionUtils.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/exception/user/UserPasswordRetryLimitCountException.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/xss/Xss.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/ExceptionUtil.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/exception/UtilException.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/core/domain/entity/SysRole.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/core/text/CharsetKit.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/core/domain/entity/SysUser.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/LogUtils.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/CookieUtils.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/core/domain/BaseEntity.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/security/CipherUtils.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/exception/base/BaseException.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/xss/XssFilter.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/exception/user/UserPasswordRetryLimitExceedException.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/constant/GenConstants.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/config/datasource/DynamicDataSourceContextHolder.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/core/domain/TreeEntity.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/html/HTMLFilter.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/file/MimeTypeUtils.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/IpUtils.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/json/JSON.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/constant/ShiroConstants.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/uuid/IdUtils.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/uuid/UUID.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/annotation/Excels.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/enums/BusinessStatus.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/exception/user/UserException.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/exception/user/UserDeleteException.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/ServletUtils.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/exception/file/FileNameLengthLimitExceededException.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/annotation/DataSource.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/core/domain/entity/SysDept.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/enums/OperatorType.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/StringUtils.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/file/FileTypeUtils.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/exception/file/FileException.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/config/thread/ThreadPoolConfig.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/Threads.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/core/domain/entity/SysMenu.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/core/domain/entity/SysDictData.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/security/Md5Utils.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/enums/BusinessType.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/enums/DataSourceType.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/core/page/PageDomain.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/config/ServerConfig.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/core/page/TableDataInfo.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/core/text/Convert.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/xss/XssValidator.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/core/page/TableSupport.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/exception/user/UserBlockedException.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/exception/user/UserPasswordNotMatchException.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/file/ImageUtils.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/http/HttpUtils.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/constant/ScheduleConstants.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/exception/DemoModeException.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/spring/SpringUtils.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/exception/GlobalException.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/exception/user/RoleBlockedException.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/reflect/ReflectUtils.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/MessageUtils.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/utils/uuid/Seq.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-common/src/main/java/com/renli/common/xss/XssHttpServletRequestWrapper.java

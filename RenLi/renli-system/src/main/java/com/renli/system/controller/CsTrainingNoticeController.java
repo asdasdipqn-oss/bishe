@@ -19,7 +19,7 @@ import com.renli.common.core.domain.AjaxResult;
 import com.renli.common.utils.poi.ExcelUtil;
 import com.renli.common.core.page.TableDataInfo;
 import com.renli.common.core.domain.entity.SysUser;
-import com.renli.common.core.domain.entity.SysRole;
+import com.renli.common.utils.DeptPermissionUtils;
 
 @Controller
 @RequestMapping("/system/tongzhi")
@@ -43,30 +43,17 @@ public class CsTrainingNoticeController extends BaseController
     public TableDataInfo list(CsTrainingNotice csTrainingNotice)
     {
         SysUser currentUser = getSysUser();
-        List<SysRole> roles = currentUser.getRoles();
-        
-        boolean isNormalUser = true;
-        boolean isDeptManager = false;
-        
-        if (roles != null) {
-            for (SysRole role : roles) {
-                String roleKey = role.getRoleKey();
-                if ("jl".equals(roleKey)) {
-                    isDeptManager = true;
-                    isNormalUser = false;
-                    break;
-                }
-                else if ("admin".equals(roleKey) || "gly".equals(roleKey) || "hr".equals(roleKey)) {
-                    isNormalUser = false;
-                    break;
-                }
+        String permissionType = DeptPermissionUtils.getUserPermissionType(currentUser);
+
+        // 根据部门权限设置过滤条件
+        if (DeptPermissionUtils.isDeptUser(currentUser) || DeptPermissionUtils.isDeptManager(currentUser)) {
+            // 普通员工和部门经理只能看自己部门的培训通知
+            String deptName = DeptPermissionUtils.getUserVisibleDeptName(currentUser);
+            if (deptName != null && !deptName.isEmpty()) {
+                csTrainingNotice.setTargetDept(deptName);
             }
         }
-        
-        if (isDeptManager) {
-            csTrainingNotice.setTargetDept(currentUser.getDept().getDeptName());
-        }
-        
+
         startPage();
         List<CsTrainingNotice> list = csTrainingNoticeService.selectCsTrainingNoticeList(csTrainingNotice);
         return getDataTable(list);
@@ -79,24 +66,17 @@ public class CsTrainingNoticeController extends BaseController
     public AjaxResult export(CsTrainingNotice csTrainingNotice)
     {
         SysUser currentUser = getSysUser();
-        List<SysRole> roles = currentUser.getRoles();
-        
-        boolean isDeptManager = false;
-        
-        if (roles != null) {
-            for (SysRole role : roles) {
-                String roleKey = role.getRoleKey();
-                if ("jl".equals(roleKey)) {
-                    isDeptManager = true;
-                    break;
-                }
+        String permissionType = DeptPermissionUtils.getUserPermissionType(currentUser);
+
+        // 根据部门权限设置过滤条件
+        if (DeptPermissionUtils.isDeptUser(currentUser) || DeptPermissionUtils.isDeptManager(currentUser)) {
+            // 普通员工和部门经理只能导出自己部门的培训通知
+            String deptName = DeptPermissionUtils.getUserVisibleDeptName(currentUser);
+            if (deptName != null && !deptName.isEmpty()) {
+                csTrainingNotice.setTargetDept(deptName);
             }
         }
-        
-        if (isDeptManager) {
-            csTrainingNotice.setTargetDept(currentUser.getDept().getDeptName());
-        }
-        
+
         List<CsTrainingNotice> list = csTrainingNoticeService.selectCsTrainingNoticeList(csTrainingNotice);
         ExcelUtil<CsTrainingNotice> util = new ExcelUtil<CsTrainingNotice>(CsTrainingNotice.class);
         return util.exportExcel(list, "通知数据");

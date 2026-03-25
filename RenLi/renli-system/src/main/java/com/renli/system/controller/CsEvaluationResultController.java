@@ -19,7 +19,7 @@ import com.renli.common.core.domain.AjaxResult;
 import com.renli.common.utils.poi.ExcelUtil;
 import com.renli.common.core.page.TableDataInfo;
 import com.renli.common.core.domain.entity.SysUser;
-import com.renli.common.core.domain.entity.SysRole;
+import com.renli.common.utils.DeptPermissionUtils;
 
 @Controller
 @RequestMapping("/system/result")
@@ -43,33 +43,16 @@ public class CsEvaluationResultController extends BaseController
     public TableDataInfo list(CsEvaluationResult csEvaluationResult)
     {
         SysUser currentUser = getSysUser();
-        List<SysRole> roles = currentUser.getRoles();
-        
-        boolean isNormalUser = true;
-        boolean isDeptManager = false;
-        
-        if (roles != null) {
-            for (SysRole role : roles) {
-                String roleKey = role.getRoleKey();
-                if ("jl".equals(roleKey)) {
-                    isDeptManager = true;
-                    isNormalUser = false;
-                    break;
-                }
-                else if ("admin".equals(roleKey) || "gly".equals(roleKey) || "hr".equals(roleKey)) {
-                    isNormalUser = false;
-                    break;
-                }
-            }
-        }
-        
-        if (isNormalUser) {
+        String permissionType = DeptPermissionUtils.getUserPermissionType(currentUser);
+
+        // 根据部门权限设置过滤条件
+        if (DeptPermissionUtils.isDeptUser(currentUser)) {
+            // 普通员工只能看自己的考核结果
             csEvaluationResult.setEmployee(currentUser.getUserName());
         }
-        else if (isDeptManager) {
-            csEvaluationResult.setEmployee(null);
-        }
-        
+        // 部门经理可以看所有考核结果（不设置employee过滤）
+        // 管理员也可以看所有考核结果
+
         startPage();
         List<CsEvaluationResult> list = csEvaluationResultService.selectCsEvaluationResultList(csEvaluationResult);
         return getDataTable(list);
@@ -82,33 +65,16 @@ public class CsEvaluationResultController extends BaseController
     public AjaxResult export(CsEvaluationResult csEvaluationResult)
     {
         SysUser currentUser = getSysUser();
-        List<SysRole> roles = currentUser.getRoles();
-        
-        boolean isNormalUser = true;
-        boolean isDeptManager = false;
-        
-        if (roles != null) {
-            for (SysRole role : roles) {
-                String roleKey = role.getRoleKey();
-                if ("jl".equals(roleKey)) {
-                    isDeptManager = true;
-                    isNormalUser = false;
-                    break;
-                }
-                else if ("admin".equals(roleKey) || "gly".equals(roleKey) || "hr".equals(roleKey)) {
-                    isNormalUser = false;
-                    break;
-                }
-            }
-        }
-        
-        if (isNormalUser) {
+        String permissionType = DeptPermissionUtils.getUserPermissionType(currentUser);
+
+        // 根据部门权限设置过滤条件
+        if (DeptPermissionUtils.isDeptUser(currentUser)) {
+            // 普通员工只能导出自己的考核结果
             csEvaluationResult.setEmployee(currentUser.getUserName());
         }
-        else if (isDeptManager) {
-            csEvaluationResult.setEmployee(null);
-        }
-        
+        // 部门经理可以导出所有考核结果（不设置employee过滤）
+        // 管理员也可以导出所有考核结果
+
         List<CsEvaluationResult> list = csEvaluationResultService.selectCsEvaluationResultList(csEvaluationResult);
         ExcelUtil<CsEvaluationResult> util = new ExcelUtil<CsEvaluationResult>(CsEvaluationResult.class);
         return util.exportExcel(list, "培训考核结果数据");

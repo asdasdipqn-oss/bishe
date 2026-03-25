@@ -1,8 +1,10 @@
 package com.renli.framework.config;
 
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * 程序注解配置
@@ -16,5 +18,9 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @MapperScan("com.renli.**.mapper")
 public class ApplicationConfig
 {
-
+    @Bean
+    public RestTemplate restTemplate()
+    {
+        return new RestTemplate();
+    }
 }

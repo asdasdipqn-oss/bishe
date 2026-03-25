@@ -40,11 +40,25 @@ public class SigninfoController {
                 pageInfoVo.getPage(),
                 pageInfoVo.getSize());
         final QueryWrapper<Signinfo> wrapper = new QueryWrapper<>();
-        wrapper.like("username", pageInfoVo.getUsername());
-        wrapper.like("address", pageInfoVo.getAddress());
+
+        // Only add LIKE filter if username is not null and not empty
+        if (pageInfoVo.getUsername() != null && !pageInfoVo.getUsername().trim().isEmpty()) {
+            wrapper.like("username", pageInfoVo.getUsername());
+        }
+
+        // Only add LIKE filter if address is not null and not empty
+        if (pageInfoVo.getAddress() != null && !pageInfoVo.getAddress().trim().isEmpty()) {
+            wrapper.like("address", pageInfoVo.getAddress());
+        }
+
+        // Date range filtering
         if (pageInfoVo.getStartTime() != null && pageInfoVo.getEndTime() != null) {
             wrapper.between("date", pageInfoVo.getStartTime(), pageInfoVo.getEndTime());
         }
+
+        // Order by date descending
+        wrapper.orderByDesc("date");
+
         return (Page<Signinfo>) signinfoService.page(page1, wrapper);
     }
 

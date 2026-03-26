@@ -330,10 +330,11 @@
                 html += '<td>' + (item.username || '-') + '</td>';
                 html += '<td>' + (item.temperature || '-') + '</td>';
                 html += '<td>' + (item.address || '-') + '</td>';
+                html += '<td>' + (item.date || '-') + '</td>';
                 html += '</tr>';
             }
         } else {
-            html += '<tr><td colspan="4" class="empty-state"><i class="fa fa-inbox"></i> 暂无打卡记录</td></tr>';
+            html += '<tr><td colspan="5" class="empty-state"><i class="fa fa-inbox"></i> 暂无打卡记录</td></tr>';
         }
 
         $('#attendanceBody').html(html);

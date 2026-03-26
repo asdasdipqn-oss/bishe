@@ -46,24 +46,27 @@ public class AttendanceController extends BaseController {
             return errorRsp;
         }
 
-        // Check if current user is admin
-        boolean isAdmin = false;
+        // Check if current user is admin or dept manager
+        boolean canViewAll = false;
         if (currentUser.getRoles() != null && !currentUser.getRoles().isEmpty()) {
             for (SysRole role : currentUser.getRoles()) {
-                if ("admin".equals(role.getRoleKey())) {
-                    isAdmin = true;
+                String roleKey = role.getRoleKey();
+                // Admin or dept manager can view all records
+                if ("admin".equals(roleKey) || "gly".equals(roleKey) || "hr".equals(roleKey) || "jl".equals(roleKey)) {
+                    canViewAll = true;
                     break;
                 }
             }
         }
 
-        // Determine username parameter to send to 8088 service
+        // Regular users can only see their own records, users who can view all can search all users
         String usernameParam = null;
-        if (!isAdmin) {
-            // Non-admin users can only see their own records
+        if (!canViewAll) {
             usernameParam = currentUser.getUserName();
+        } else if (username != null && !username.isEmpty()) {
+            // User with view-all permission searching for specific username
+            usernameParam = username;
         }
-        // Admin users: if username is provided, use it; otherwise send empty to get all records
 
         try {
             RestTemplate restTemplate = new RestTemplate();

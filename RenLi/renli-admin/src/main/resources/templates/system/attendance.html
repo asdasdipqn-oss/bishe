@@ -13,34 +13,46 @@
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <style>
-        body { background-color: #f3f3f6; }
+        body { background-color: #f3f3f6; margin: 0; padding: 20px; }
         .attendance-header {
             background: white;
             padding: 20px 25px;
             margin-bottom: 20px;
-            border-radius: 4px;
+            border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         .page-title {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 600;
             color: #333;
             margin: 0;
         }
-        .btn-back {
-            padding: 6px 16px;
-            background: #f0f0f0;
-            border: 1px solid #e0e0e0;
-            border-radius: 3px;
+        .btn-punch-small {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
         }
-        .section-card {
+        .btn-punch-small:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+        }
+        .content-card {
             background: white;
             border-radius: 8px;
             box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-            margin-bottom: 20px;
+            padding: 0;
             overflow: hidden;
         }
-        .section-header {
+        .card-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 15px 20px;
@@ -48,13 +60,13 @@
             align-items: center;
             justify-content: space-between;
         }
-        .section-title {
-            font-size: 16px;
+        .card-title {
+            font-size: 18px;
             font-weight: 600;
             color: white;
             margin: 0;
         }
-        .section-icon {
+        .card-icon {
             margin-right: 10px;
         }
         .search-area {
@@ -66,66 +78,45 @@
             display: flex;
             gap: 15px;
             flex-wrap: wrap;
+            align-items: center;
         }
         .search-item {
-            flex: 1;
-            min-width: 200px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         .search-item label {
-            display: block;
-            margin-bottom: 8px;
             font-weight: 500;
             color: #555;
+            white-space: nowrap;
         }
         .search-item input {
             padding: 8px 12px;
             border: 1px solid #ddd;
             border-radius: 4px;
             font-size: 14px;
+            width: 180px;
         }
         .search-item input:focus {
             border-color: #667eea;
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
             outline: none;
         }
-        .search-buttons {
-            padding: 15px 20px;
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-        }
-        .btn-search {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            color: white;
-            padding: 10px 24px;
-            border-radius: 6px;
-            min-width: 100px;
-        }
-        .btn-search:hover {
-            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-            transform: translateY(-1px);
-        }
-        .btn-refresh {
-            background: #f0f0f0;
-            border: 1px solid #e0e0e0;
-            color: #333;
-            padding: 10px 24px;
-            border-radius: 6px;
-            min-width: 100px;
-        }
-        .btn-refresh:hover {
-            background: #e8e8e8;
-        }
         .table-container {
-            padding: 0 20px;
+            padding: 0;
+            max-height: calc(100vh - 280px);
+            overflow-y: auto;
         }
         .data-table {
             margin: 0;
             border-collapse: collapse;
+            width: 100%;
         }
         .data-table thead {
             background: #f8f9fa;
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
         .data-table th {
             padding: 14px;
@@ -145,6 +136,7 @@
             border-bottom: 1px solid #e9ecef;
             text-align: center;
             color: #333;
+            font-size: 14px;
         }
         .data-table tr:nth-child(even) td {
             background: #fafbfc;
@@ -152,142 +144,139 @@
         .data-table .empty-state {
             text-align: center;
             color: #999;
-            padding: 40px 20px;
+            padding: 60px 20px;
             font-size: 14px;
         }
-        .punch-card {
+        .pagination-container {
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-            margin-bottom: 20px;
-            overflow: hidden;
+            border-top: 1px solid #e9ecef;
         }
-        .punch-icon {
-            font-size: 48px;
-            color: #667eea;
-            margin-bottom: 20px;
+        .pagination-info {
+            color: #666;
+            margin-right: 20px;
         }
-        .punch-button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            color: white;
-            padding: 15px 40px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
+        .pagination-btn {
+            background: #f0f0f0;
+            border: 1px solid #e9ecef;
+            color: #333;
+            padding: 6px 16px;
+            border-radius: 4px;
             cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+            margin: 0 5px;
+            min-width: 36px;
         }
-        .punch-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 16px rgba(102, 126, 234, 0.3);
+        .pagination-btn:hover {
+            background: #667eea;
+            color: white;
         }
-        .punch-hint {
-            text-align: center;
+        .pagination-btn:disabled {
+            background: #e9ecef;
             color: #999;
-            padding: 20px;
-            margin-top: 15px;
+            cursor: not-allowed;
         }
     </style>
 </head>
 <body class="gray-bg">
-<div style="padding: 20px;">
     <!-- 头部 -->
     <div class="attendance-header">
-        <div>
-            <h3 class="page-title"><i class="fa fa-calendar-check-o" style="margin-right: 10px; color: #667eea;"></i>考勤管理</h3>
-        </div>
-        <button class="btn btn-back" onclick="window.parent.location.reload()">
+        <h3 class="page-title">
+            <i class="fa fa-calendar-check-o" style="margin-right: 10px; color: #667eea;"></i>考勤管理
+            <button class="btn-punch-small" onclick="goTo8080()">
+                <i class="fa fa-location-arrow" style="margin-right: 5px;"></i>前往打卡
+            </button>
+        </h3>
+    <button class="btn btn-back" style="margin-left: auto;" onclick="window.parent.location.reload()">
             <i class="fa fa-arrow-left"></i> 返回
         </button>
     </div>
 
-    <!-- 主体 -->
-    <div class="row">
-        <!-- 左侧：打卡记录 -->
-        <div class="col-md-5">
-            <div class="section-card">
-                <div class="section-header">
-                    <div>
-                        <i class="fa fa-list-alt section-icon"></i>
-                        <span class="section-title">打卡记录</span>
-                    </div>
-                </div>
-                <div class="search-area">
-                    <div class="search-row">
-                        <div class="search-item">
-                            <label>用户名</label>
-                            <input type="text" id="username" class="form-control" placeholder="请输入用户名"/>
-                        </div>
-                        <div class="search-item">
-                            <label>日期范围</label>
-                            <div style="display: flex; gap: 10px;">
-                                <input type="date" id="startDate" class="form-control" placeholder="开始日期" style="flex: 1;"/>
-                                <span style="display: flex; align-items: center; color: #999;">至</span>
-                                <input type="date" id="endDate" class="form-control" placeholder="结束日期" style="flex: 1;"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="search-buttons">
-                        <button class="btn btn-search" onclick="searchRecords()">
-                            <i class="fa fa-search"></i> 查询
-                        </button>
-                        <button class="btn btn-refresh" onclick="refreshRecords()">
-                            <i class="fa fa-refresh"></i> 刷新
-                        </button>
-                    </div>
+    <!-- 主内容 -->
+    <div class="content-card">
+        <div class="card-header">
+            <div>
+                <i class="fa fa-list-alt card-icon"></i>
+                <span class="card-title">打卡记录</span>
+            </div>
+        </div>
 
-                    <!-- 打卡记录表格 -->
-                    <div class="table-container">
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th width="10%">序号</th>
-                                    <th width="20%">用户名</th>
-                                    <th width="15%">打卡时间</th>
-                                    <th width="15%">体温</th>
-                                    <th width="35%">地址</th>
-                                    <th width="15%">打卡日期</th>
-                                </tr>
-                            </thead>
-                            <tbody id="attendanceBody">
-                                <tr>
-                                    <td colspan="5" class="empty-state">点击刷新按钮加载打卡记录</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+        <!-- 搜索区域 -->
+        <div class="search-area">
+            <div class="search-row">
+                <div class="search-item">
+                    <label>用户名</label>
+                    <input type="text" id="username" class="form-control" placeholder="请输入用户名"/>
+                </div>
+                <div class="search-item">
+                    <label>日期范围</label>
+                    <input type="date" id="startDate" class="form-control" placeholder="开始日期"/>
+                    <span style="margin: 0 10px; color: #999;">至</span>
+                    <input type="date" id="endDate" class="form-control" placeholder="结束日期"/>
+                </div>
+                <div class="search-item" style="flex: 1;">
+                    <button class="btn-search" onclick="searchRecords()">
+                        <i class="fa fa-search"></i> 查询
+                    </button>
+                    <button class="btn-refresh" onclick="refreshRecords()">
+                        <i class="fa fa-refresh"></i> 刷新
+                    </button>
                 </div>
             </div>
         </div>
 
-        <!-- 右侧：打卡服务 -->
-        <div class="col-md-7">
-            <div class="punch-card">
-                <div class="section-header">
-                    <div>
-                        <i class="fa fa-clock-o section-icon"></i>
-                        <span class="section-title">打卡服务</span>
-                    </div>
-                </div>
-                <div class="box-body" style="padding: 40px;">
-                    <div class="text-center">
-                        <button class="punch-button" onclick="goTo8080()">
-                            <i class="fa fa-location-arrow"></i>&nbsp;前往打卡
-                        </button>
-                    </div>
-                    <p class="punch-hint">
-                        <i class="fa fa-info-circle"></i> 点击上方按钮跳转到 8080 端口打卡服务
-                    </p>
-                </div>
-            </div>
+        <!-- 打卡记录表格 -->
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th width="5%">序号</th>
+                        <th width="15%">用户名</th>
+                        <th width="15%">打卡时间</th>
+                        <th width="15%">体温</th>
+                        <th width="40%">地址</th>
+                        <th width="10%">打卡日期</th>
+                    </tr>
+                </thead>
+                <tbody id="attendanceBody">
+                    <tr>
+                        <td colspan="5" class="empty-state">点击刷新按钮加载打卡记录</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 分页 -->
+        <div class="pagination-container">
+            <span class="pagination-info">共 <span id="totalCount">0</span> 条记录</span>
+            <button class="pagination-btn" onclick="goFirstPage()" id="btnFirst" disabled>
+                <i class="fa fa-angle-double-left"></i>
+            </button>
+            <button class="pagination-btn" onclick="goPrevPage()" id="btnPrev" disabled>
+                <i class="fa fa-angle-left"></i>
+            </button>
+            <span style="margin: 0 10px; color: #999;">第 <span id="currentPage">1</span> 页</span>
+            <button class="pagination-btn" onclick="goNextPage()" id="btnNext" disabled>
+                <i class="fa fa-angle-right"></i>
+            </button>
+            <button class="pagination-btn" onclick="goLastPage()" id="btnLast" disabled>
+                <i class="fa fa-angle-double-right"></i>
+            </button>
         </div>
     </div>
 </div>
 
 <!-- 页面脚本 -->
 <script>
+    // 分页参数
+    var currentPage = 1;
+    var pageSize = 15;
+    var totalCount = 0;
+    var allRecords = [];
+    var filteredRecords = [];
+
     function goTo8080() {
         window.open('http://localhost:8080', '_blank');
     }
@@ -303,12 +292,23 @@
             endTime: endDate
         }, function(result) {
             if (result.code == 0 && result.rows && result.rows.length > 0) {
-                renderTable(result.rows);
+                allRecords = result.rows;
+                filteredRecords = result.rows;
+                totalCount = result.total;
+                currentPage = 1;
+                updatePagination();
+                renderTable();
             } else {
-                $('#attendanceBody').html('<tr><td colspan="5" class="empty-state"><i class="fa fa-inbox"></i> 暂无打卡记录</td></tr>');
+                filteredRecords = [];
+                totalCount = 0;
+                updatePagination();
+                renderTable();
             }
         }).fail(function() {
-            $('#attendanceBody').html('<tr><td colspan="5" class="empty-state"><i class="fa fa-exclamation-triangle"></i> 查询失败，请检查服务状态</td></tr>');
+            filteredRecords = [];
+            totalCount = 0;
+            updatePagination();
+            renderTable();
         });
     }
 
@@ -317,15 +317,18 @@
         searchRecords();
     }
 
-    function renderTable(data) {
+    function renderTable() {
         var html = '';
-        if (data && data.length > 0) {
-            for (var i = 0; i < data.length; i++) {
-                var item = data[i];
+        var startIdx = (currentPage - 1) * pageSize;
+        var endIdx = Math.min(startIdx + pageSize, filteredRecords.length);
+
+        if (filteredRecords.length > 0) {
+            for (var i = startIdx; i < endIdx; i++) {
+                var item = filteredRecords[i];
+                var globalIndex = startIdx + (i - startIdx) + 1;
                 html += '<tr>';
-                html += '<td>' + (i + 1) + '</td>';
+                html += '<td>' + globalIndex + '</td>';
                 html += '<td>' + (item.username || '-') + '</td>';
-                html += '<td>' + (item.temperature || '-') + '</td>';
                 html += '<td>' + (item.temperature || '-') + '</td>';
                 html += '<td>' + (item.address || '-') + '</td>';
                 html += '<td>' + (item.date || '-') + '</td>';
@@ -334,7 +337,53 @@
         } else {
             html += '<tr><td colspan="5" class="empty-state"><i class="fa fa-inbox"></i> 暂无打卡记录</td></tr>';
         }
+
         $('#attendanceBody').html(html);
+    }
+
+    function updatePagination() {
+        $('#totalCount').text(totalCount);
+        $('#currentPage').text(currentPage);
+
+        var totalPages = Math.ceil(totalCount / pageSize);
+        $('#btnFirst').prop('disabled', currentPage <= 1);
+        $('#btnPrev').prop('disabled', currentPage <= 1);
+        $('#btnNext').prop('disabled', currentPage >= totalPages || totalPages === 0);
+        $('#btnLast').prop('disabled', currentPage >= totalPages || totalPages === 0);
+    }
+
+    function goFirstPage() {
+        if (currentPage > 1) {
+            currentPage = 1;
+            renderTable();
+            updatePagination();
+        }
+    }
+
+    function goPrevPage() {
+        if (currentPage > 1) {
+            currentPage--;
+            renderTable();
+            updatePagination();
+        }
+    }
+
+    function goNextPage() {
+        var totalPages = Math.ceil(totalCount / pageSize);
+        if (currentPage < totalPages) {
+            currentPage++;
+            renderTable();
+            updatePagination();
+        }
+    }
+
+    function goLastPage() {
+        var totalPages = Math.ceil(totalCount / pageSize);
+        if (currentPage < totalPages) {
+            currentPage = totalPages;
+            renderTable();
+            updatePagination();
+        }
     }
 
     $(function() {

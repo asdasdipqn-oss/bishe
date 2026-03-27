@@ -25,11 +25,12 @@ public class Signinfo {
     public Signinfo() {
     }
 
-    public Signinfo(String username, String temperature, String address, String date) {
+    public Signinfo(String username, String temperature, String address, String date, String dept) {
         this.username = username;
         this.temperature = temperature;
         this.address = address;
         this.date = date;
+        this.dept = dept;
     }
 
     public String getUsername() {

@@ -15,6 +15,8 @@ public class PageInfoVo {
     private String username;
     /*地址*/
     private String address;
+    /*部门*/
+    private String dept;
     /*开始时间*/
     private Date startTime;
     /*结束时间*/
@@ -23,11 +25,12 @@ public class PageInfoVo {
     public PageInfoVo() {
     }
 
-    public PageInfoVo(Integer page, Integer size, String username, String address, Date startTime, Date endTime) {
+    public PageInfoVo(Integer page, Integer size, String username, String address, String dept, Date startTime, Date endTime) {
         this.page = page;
         this.size = size;
         this.username = username;
         this.address = address;
+        this.dept = dept;
         this.startTime = startTime;
         this.endTime = endTime;
     }
@@ -62,6 +65,14 @@ public class PageInfoVo {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getDept() {
+        return dept;
+    }
+
+    public void setDept(String dept) {
+        this.dept = dept;
     }
 
     public Date getStartTime() {

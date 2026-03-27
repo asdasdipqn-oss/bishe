@@ -6,15 +6,20 @@ import com.renli.common.core.domain.AjaxResult;
 import com.renli.common.core.domain.entity.SysRole;
 import com.renli.common.core.domain.entity.SysUser;
 import com.renli.common.core.page.TableDataInfo;
+import com.renli.system.domain.Signinfo;
+import com.renli.system.mapper.SigninfoMapper;
+import com.renli.system.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +33,12 @@ public class AttendanceController extends BaseController {
     @Autowired
     private RuoYiConfig serverConfig;
 
+    @Autowired
+    private ISysUserService userService;
+
+    @Autowired
+    private SigninfoMapper signinfoMapper;
+
     @GetMapping("")
     public String index() {
         return "system/attendance";
@@ -35,7 +46,7 @@ public class AttendanceController extends BaseController {
 
     @PostMapping("/data")
     @ResponseBody
-    public TableDataInfo data(String username, String startTime, String endTime)
+    public TableDataInfo data(String username, String startTime, String endTime, String dept)
     {
         SysUser currentUser = getSysUser();
 
@@ -47,10 +58,15 @@ public class AttendanceController extends BaseController {
         }
 
         // Check if current user is admin or dept manager
+        boolean isAdmin = false;
         boolean canViewAll = false;
         if (currentUser.getRoles() != null && !currentUser.getRoles().isEmpty()) {
             for (SysRole role : currentUser.getRoles()) {
                 String roleKey = role.getRoleKey();
+                // Admin user should show as "管理员"
+                if ("admin".equals(roleKey)) {
+                    isAdmin = true;
+                }
                 // Admin or dept manager can view all records
                 if ("admin".equals(roleKey) || "gly".equals(roleKey) || "hr".equals(roleKey) || "jl".equals(roleKey)) {
                     canViewAll = true;
@@ -87,6 +103,10 @@ public class AttendanceController extends BaseController {
             }
             // Optional: add address filter if needed
             requestBody.put("address", "");
+            // Add dept filter if provided
+            if (dept != null && !dept.isEmpty()) {
+                requestBody.put("dept", dept);
+            }
             // Date range filtering
             if (startTime != null && !startTime.isEmpty()) {
                 requestBody.put("startTime", startTime);
@@ -106,12 +126,44 @@ public class AttendanceController extends BaseController {
                 @SuppressWarnings("unchecked")
                 List<Map<String, Object>> records = (List<Map<String, Object>>) response.get("records");
 
+                // Cache for user dept names to avoid repeated queries
+                Map<String, String> userDeptCache = new HashMap<>();
+
                 // Convert to expected format
                 List<Map<String, Object>> convertedRecords = new ArrayList<>();
                 if (records != null) {
                     for (Map<String, Object> record : records) {
                         Map<String, Object> map = new java.util.HashMap<>();
-                        map.put("username", record.get("username"));
+                        map.put("id", record.get("id"));
+                        String recordUsername = (String) record.get("username");
+                        map.put("username", recordUsername);
+
+                        // Get dept name from database if not in cache
+                        String deptName = userDeptCache.get(recordUsername);
+                        boolean canDelete = false;
+                        if (deptName == null) {
+                            SysUser recordUser = userService.selectUserByLoginName(recordUsername);
+                            if (recordUser != null && recordUser.getRoles() != null && !recordUser.getRoles().isEmpty()) {
+                                for (SysRole role : recordUser.getRoles()) {
+                                    String roleKey = role.getRoleKey();
+                                    if ("admin".equals(roleKey) || "gly".equals(roleKey)) {
+                                        canDelete = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            if (canDelete) {
+                                deptName = "管理员";
+                            } else if (recordUser != null && recordUser.getDept() != null) {
+                                deptName = recordUser.getDept().getDeptName();
+                            }
+                            if (deptName == null) {
+                                deptName = (String) record.get("dept");
+                            }
+                            userDeptCache.put(recordUsername, deptName);
+                        }
+                        map.put("canDelete", canDelete ? "true" : "false");
+                        map.put("dept", deptName);
                         map.put("temperature", record.get("temperature"));
                         map.put("address", record.get("address"));
                         map.put("date", record.get("date"));
@@ -134,6 +186,49 @@ public class AttendanceController extends BaseController {
             errorRsp.setCode(500);
             errorRsp.setMsg("查询失败: " + e.getMessage());
             return errorRsp;
+        }
+    }
+
+    /**
+     * 删除打卡记录
+     */
+    @PostMapping("/delete")
+    @ResponseBody
+    public AjaxResult delete(@RequestParam Long id)
+    {
+        SysUser currentUser = getSysUser();
+
+        if (currentUser == null) {
+            return AjaxResult.error("用户未登录");
+        }
+
+        // Check if user has permission to delete
+        boolean canDelete = false;
+        if (currentUser.getRoles() != null && !currentUser.getRoles().isEmpty()) {
+            for (SysRole role : currentUser.getRoles()) {
+                String roleKey = role.getRoleKey();
+                // Admin or dept manager can delete records
+                if ("admin".equals(roleKey) || "gly".equals(roleKey) || "hr".equals(roleKey) || "jl".equals(roleKey)) {
+                    canDelete = true;
+                    break;
+                }
+            }
+        }
+
+        if (!canDelete) {
+            return AjaxResult.error("没有权限删除考勤记录");
+        }
+
+        try {
+            int result = signinfoMapper.deleteById(id);
+            if (result > 0) {
+                return AjaxResult.success();
+            } else {
+                return AjaxResult.error("删除失败，记录不存在");
+            }
+        } catch (Exception e) {
+            logger.error("删除打卡记录失败", e);
+            return AjaxResult.error("删除失败: " + e.getMessage());
         }
     }
 }

@@ -207,6 +207,17 @@
         <div class="search-area">
             <div class="search-row">
                 <div class="search-item">
+                    <label>部门</label>
+                    <select id="dept" class="form-control" style="width: 120px;">
+                        <option value="">全部部门</option>
+                        <option value="研发部">研发部</option>
+                        <option value="市场部">市场部</option>
+                        <option value="销售部">销售部</option>
+                        <option value="财务部">财务部</option>
+                        <option value="人事部">人事部</option>
+                    </select>
+                </div>
+                <div class="search-item">
                     <label>用户名</label>
                     <input type="text" id="username" class="form-control" placeholder="请输入用户名"/>
                 </div>
@@ -233,15 +244,17 @@
                 <thead>
                     <tr>
                         <th width="5%">序号</th>
-                        <th width="15%">用户名</th>
-                        <th width="15%">打卡时间</th>
-                        <th width="15%">地址</th>
-                        <th width="55%">打卡日期</th>
+                        <th width="14%">用户名</th>
+                        <th width="12%">部门</th>
+                        <th width="14%">打卡时间</th>
+                        <th width="20%">地址</th>
+                        <th width="27%">打卡日期</th>
+                        <th width="8%">操作</th>
                     </tr>
                 </thead>
                 <tbody id="attendanceBody">
                     <tr>
-                        <td colspan="5" class="empty-state">点击刷新按钮加载打卡记录</td>
+                        <td colspan="7" class="empty-state">点击刷新按钮加载打卡记录</td>
                     </tr>
                 </tbody>
             </table>
@@ -280,20 +293,54 @@
         window.open('http://localhost:8080', '_blank');
     }
 
+    function deleteRecord(id) {
+        if (!confirm('确定要删除这条打卡记录吗？')) {
+            return;
+        }
+
+        $.post('/system/attendance/delete', { id: id }, function(result) {
+            if (result.code == 0) {
+                $.modal.msg("删除成功");
+                searchRecords();
+            } else {
+                $.modal.msg(result.msg || "删除失败");
+            }
+        }).fail(function() {
+            $.modal.msg("删除失败");
+        });
+    }
+
     function searchRecords() {
         var username = $('#username').val();
         var startDate = $('#startDate').val();
         var endDate = $('#endDate').val();
+        var dept = $('#dept').val();
 
-        $.post('/system/attendance/data', {
+        // 不发送空的部门参数
+        var requestData = {
             username: username,
             startTime: startDate,
             endTime: endDate
-        }, function(result) {
+        };
+
+        // 只有当选择了具体部门时才添加 dept 参数
+        if (dept && dept !== '') {
+            requestData.dept = dept;
+        }
+
+        $.post('/system/attendance/data', requestData, function(result) {
+            console.log('API返回数据:', result);
+            console.log('记录数:', result.rows ? result.rows.length : 0);
+            if (result.rows && result.rows.length > 0) {
+                console.log('第一条记录:', result.rows[0]);
+                console.log('第一条记录的id:', result.rows[0].id);
+            }
             if (result.code == 0 && result.rows && result.rows.length > 0) {
                 allRecords = result.rows;
                 filteredRecords = result.rows;
                 totalCount = result.total;
+                canDelete = (result.canDelete === true || result.canDelete === 'true');
+                console.log('设置canDelete为:', canDelete);
                 currentPage = 1;
                 updatePagination();
                 renderTable();
@@ -312,7 +359,7 @@
     }
 
     function refreshRecords() {
-        $('#attendanceBody').html('<tr><td colspan="5" class="empty-state"><i class="fa fa-spinner fa-spin"></i> 加载中...</td></tr>');
+        $('#attendanceBody').html('<tr><td colspan="6" class="empty-state"><i class="fa fa-spinner fa-spin"></i> 加载中...</td></tr>');
         searchRecords();
     }
 
@@ -325,16 +372,23 @@
             for (var i = startIdx; i < endIdx; i++) {
                 var item = filteredRecords[i];
                 var globalIndex = startIdx + (i - startIdx) + 1;
+                var itemCanDelete = item.canDelete === "true";
                 html += '<tr>';
                 html += '<td>' + globalIndex + '</td>';
                 html += '<td>' + (item.username || '-') + '</td>';
+                html += '<td>' + (item.dept || '-') + '</td>';
                 html += '<td>' + (item.temperature || '-') + '</td>';
                 html += '<td>' + (item.address || '-') + '</td>';
                 html += '<td>' + (item.date || '-') + '</td>';
+                html += '<td>';
+                if (itemCanDelete) {
+                    html += '<button class="btn-delete" onclick="deleteRecord(' + item.id + ')" style="padding: 4px 10px; background: #ff4d4f; color: white; border: none; border-radius: 3px; cursor: pointer;">删除</button>';
+                }
+                html += '</td>';
                 html += '</tr>';
             }
         } else {
-            html += '<tr><td colspan="5" class="empty-state"><i class="fa fa-inbox"></i> 暂无打卡记录</td></tr>';
+            html += '<tr><td colspan="7" class="empty-state"><i class="fa fa-inbox"></i> 暂无打卡记录</td></tr>';
         }
 
         $('#attendanceBody').html(html);

@@ -20,14 +20,17 @@ public class Signinfo {
 
     private String date;
 
+    private String dept;
+
     public Signinfo() {
     }
 
-    public Signinfo(String username, String temperature, String address, String date) {
+    public Signinfo(String username, String temperature, String address, String date, String dept) {
         this.username = username;
         this.temperature = temperature;
         this.address = address;
         this.date = date;
+        this.dept = dept;
     }
 
     public String getUsername() {
@@ -60,6 +63,14 @@ public class Signinfo {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getDept() {
+        return dept;
+    }
+
+    public void setDept(String dept) {
+        this.dept = dept;
     }
 
 }

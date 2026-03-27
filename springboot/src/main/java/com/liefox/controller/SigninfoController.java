@@ -51,6 +51,11 @@ public class SigninfoController {
             wrapper.like("address", pageInfoVo.getAddress());
         }
 
+        // Only add LIKE filter if dept is not null and not empty
+        if (pageInfoVo.getDept() != null && !pageInfoVo.getDept().trim().isEmpty()) {
+            wrapper.eq("dept", pageInfoVo.getDept());
+        }
+
         // Date range filtering
         if (pageInfoVo.getStartTime() != null && pageInfoVo.getEndTime() != null) {
             wrapper.between("date", pageInfoVo.getStartTime(), pageInfoVo.getEndTime());
@@ -86,5 +91,22 @@ public class SigninfoController {
         Wrapper.like("username",username);
         final List<Signinfo> list = signinfoService.list(Wrapper);
         return list;
+    }
+
+    /**
+     * 删除打卡记录
+     *
+     * @param id
+     * @return
+     */
+    @PostMapping("/delete")
+    public String delete(@RequestParam Long id) {
+        try {
+            boolean result = signinfoService.removeById(id);
+            return result ? "success" : "fail";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "fail";
+        }
     }
 }

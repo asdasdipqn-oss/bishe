@@ -20,6 +20,8 @@ public class Signinfo {
 
     private String date;
 
+    private String dept;
+
     public Signinfo() {
     }
 
@@ -62,4 +64,11 @@ public class Signinfo {
         this.date = date;
     }
 
+    public String getDept() {
+        return dept;
+    }
+
+    public void setDept(String dept) {
+        this.dept = dept;
+    }
 }

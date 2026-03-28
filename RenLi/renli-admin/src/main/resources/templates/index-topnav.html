@@ -26,7 +26,7 @@
         </div>
         <a th:href="@{/index}">
             <li class="logo hidden-xs">
-                <span class="logo-lg">中小型企业人力资源管理系统</span>
+                <span class="logo-lg" style="font-size: 14px;">中小型企业人力资源管理系统 <span id="userRoleDisplay" style="font-size: 11px; color: #667eea; margin-left: 8px;"></span></span>
             </li>
          </a>
         <div class="sidebar-collapse tab-content" id="side-menu">
@@ -435,7 +435,18 @@ $(function() {
 			layer.close(index);
 		});
 	}
-	
+
+	/* 加载并显示当前用户角色 */
+	function loadUserRoles() {
+		$.get(ctx + 'system/attendance/currentUser', function(result) {
+			if (result.code == 0 && result.data && result.data.roles) {
+				$('#userRoleDisplay').text(result.data.roles.join('、'));
+			}
+		}).fail(function() {
+			console.error('获取用户角色失败');
+		});
+	}
+
 	$("[data-toggle='tooltip']").tooltip();
 });
 </script>

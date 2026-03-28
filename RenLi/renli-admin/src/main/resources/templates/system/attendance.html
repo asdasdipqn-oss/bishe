@@ -30,6 +30,21 @@
             color: #333;
             margin: 0;
         }
+        .user-role-info {
+            color: #666;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .role-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
         .btn-punch-small {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border: none;
@@ -185,11 +200,16 @@
     <div class="attendance-header">
         <h3 class="page-title">
             <i class="fa fa-calendar-check-o" style="margin-right: 10px; color: #667eea;"></i>考勤管理
-            <button class="btn-punch-small" onclick="goTo8080()">
+        </h3>
+        <div class="user-role-info">
+            <i class="fa fa-user" style="color: #999;"></i>
+            <span id="currentUserName"></span>
+            <span id="currentUserRoles" class="role-badge"></span>
+            <button class="btn-punch-small" onclick="goTo8080()" style="margin-left: 15px;">
                 <i class="fa fa-location-arrow" style="margin-right: 5px;"></i>前往打卡
             </button>
-        </h3>
-    <button class="btn btn-back" style="margin-left: auto;" onclick="window.parent.location.reload()">
+        </div>
+        <button class="btn btn-back" style="margin-left: auto;" onclick="window.parent.location.reload()">
             <i class="fa fa-arrow-left"></i> 返回
         </button>
     </div>
@@ -462,9 +482,26 @@
     }
 
     $(function() {
+        loadCurrentUser();
         loadDepts();
         searchRecords();
     });
+
+    // 加载当前用户信息
+    function loadCurrentUser() {
+        $.get('/system/attendance/currentUser', function(result) {
+            if (result.code == 0 && result.data) {
+                $('#currentUserName').text(result.data.userName || '');
+                if (result.data.roles && result.data.roles.length > 0) {
+                    $('#currentUserRoles').text(result.data.roles.join('、'));
+                } else {
+                    $('#currentUserRoles').text('');
+                }
+            }
+        }).fail(function() {
+            console.error('获取用户信息失败');
+        });
+    }
 </script>
 </body>
 </html>

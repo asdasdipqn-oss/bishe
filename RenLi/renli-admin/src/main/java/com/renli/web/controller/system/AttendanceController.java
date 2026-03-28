@@ -64,6 +64,40 @@ public class AttendanceController extends BaseController {
         }
     }
 
+    /**
+     * 获取当前用户角色
+     */
+    @GetMapping("/currentUser")
+    @ResponseBody
+    public AjaxResult getCurrentUser() {
+        try {
+            SysUser currentUser = getSysUser();
+            if (currentUser == null) {
+                return AjaxResult.error("用户未登录");
+            }
+
+            Map<String, Object> userInfo = new HashMap<>();
+            userInfo.put("userName", currentUser.getUserName());
+
+            // Get role names
+            List<String> roleNames = new ArrayList<>();
+            if (currentUser.getRoles() != null) {
+                for (SysRole role : currentUser.getRoles()) {
+                    String roleName = role.getRoleName();
+                    if (roleName != null && !roleName.isEmpty()) {
+                        roleNames.add(roleName);
+                    }
+                }
+            }
+            userInfo.put("roles", roleNames);
+
+            return AjaxResult.success(userInfo);
+        } catch (Exception e) {
+            logger.error("获取用户信息失败", e);
+            return AjaxResult.error("获取用户信息失败");
+        }
+    }
+
     @PostMapping("/data")
     @ResponseBody
     public TableDataInfo data(String username, String startTime, String endTime, String dept)

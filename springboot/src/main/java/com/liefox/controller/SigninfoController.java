@@ -52,11 +52,6 @@ public class SigninfoController {
             wrapper.like("address", pageInfoVo.getAddress());
         }
 
-        // Only add LIKE filter if dept is not null and not empty
-        if (pageInfoVo.getDept() != null && !pageInfoVo.getDept().trim().isEmpty()) {
-            wrapper.eq("dept", pageInfoVo.getDept());
-        }
-
         // Date range filtering
         if (pageInfoVo.getStartTime() != null && pageInfoVo.getEndTime() != null) {
             wrapper.between("date", pageInfoVo.getStartTime(), pageInfoVo.getEndTime());

@@ -1,4 +1,5 @@
 /Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-system/src/main/java/com/renli/system/domain/CsRecruitmentPost.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-system/src/main/java/com/renli/system/domain/Signinfo.java
 /Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-system/src/main/java/com/renli/system/controller/CsEmployeeLifecycleController.java
 /Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-system/src/main/java/com/renli/system/service/ISysMenuService.java
 /Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-system/src/main/java/com/renli/system/domain/CsResumeScreening.java
@@ -8,6 +9,7 @@
 /Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-system/src/main/java/com/renli/system/mapper/SysUserPostMapper.java
 /Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-system/src/main/java/com/renli/system/mapper/CsRecruitmentPostMapper.java
 /Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-system/src/main/java/com/renli/system/mapper/CsAttendanceYgexceptionMapper.java
+/Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-system/src/main/java/com/renli/system/mapper/SigninfoMapper.java
 /Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-system/src/main/java/com/renli/system/mapper/SysOperLogMapper.java
 /Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-system/src/main/java/com/renli/system/service/ICsEmployeeLifecycleService.java
 /Users/wangqizhi/Desktop/bishe/code/3.12号出 （已给一版）Z2-1 @F 100@B+312 Q34 修（含款)改1 基于Web的中小型企业人力资源管理系统设计与实现 王琦智 A恰同学/RenLi/renli-system/src/main/java/com/renli/system/mapper/SysLogininforMapper.java

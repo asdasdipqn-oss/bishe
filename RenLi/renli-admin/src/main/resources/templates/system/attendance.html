@@ -342,26 +342,37 @@
         $.post('/system/attendance/data', requestData, function(result) {
             console.log('API返回数据:', result);
             console.log('记录数:', result.rows ? result.rows.length : 0);
+            console.log('code:', result.code);
             if (result.rows && result.rows.length > 0) {
                 console.log('第一条记录:', result.rows[0]);
                 console.log('第一条记录的id:', result.rows[0].id);
             }
-            if (result.code == 0 && result.rows && result.rows.length > 0) {
-                allRecords = result.rows;
-                filteredRecords = result.rows;
-                totalCount = result.total;
-                canDelete = (result.canDelete === true || result.canDelete === 'true');
-                console.log('设置canDelete为:', canDelete);
+            // 处理返回结果，无论是否有数据都继续
+            if (result.code == 0) {
+                if (result.rows && result.rows.length > 0) {
+                    allRecords = result.rows;
+                    filteredRecords = result.rows;
+                    totalCount = result.total || result.rows.length;
+                    canDelete = (result.canDelete === true || result.canDelete === 'true');
+                    console.log('设置canDelete为:', canDelete);
+                } else {
+                    allRecords = [];
+                    filteredRecords = [];
+                    totalCount = 0;
+                    console.log('无数据');
+                }
                 currentPage = 1;
                 updatePagination();
                 renderTable();
             } else {
+                console.error('API返回错误:', result.msg);
                 filteredRecords = [];
                 totalCount = 0;
                 updatePagination();
                 renderTable();
             }
-        }).fail(function() {
+        }).fail(function(xhr, status, error) {
+            console.error('请求失败:', status, error);
             filteredRecords = [];
             totalCount = 0;
             updatePagination();

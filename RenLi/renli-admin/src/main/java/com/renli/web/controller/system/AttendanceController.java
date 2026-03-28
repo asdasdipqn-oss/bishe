@@ -16,8 +16,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -80,6 +80,7 @@ public class AttendanceController extends BaseController {
         // Check if current user is admin or dept manager
         boolean isAdmin = false;
         boolean canViewAll = false;
+        boolean canViewDept = false;  // Manager can view records in their own department
         boolean canDelete = false;
         if (currentUser.getRoles() != null && !currentUser.getRoles().isEmpty()) {
             for (SysRole role : currentUser.getRoles()) {
@@ -88,24 +89,86 @@ public class AttendanceController extends BaseController {
                 if ("admin".equals(roleKey)) {
                     isAdmin = true;
                 }
-                // Admin or dept manager can view all records
-                if ("admin".equals(roleKey) || "gly".equals(roleKey) || "hr".equals(roleKey) || "jl".equals(roleKey)) {
+                // Admin, gly, hr can view all records
+                if ("admin".equals(roleKey) || "gly".equals(roleKey) || "hr".equals(roleKey)) {
                     canViewAll = true;
                 }
-                // Only admin and gly can delete records
+                // Manager (jl) can view records in their own department
+                if ("jl".equals(roleKey)) {
+                    canViewDept = true;
+                }
+                // Admin and gly can delete records
                 if ("admin".equals(roleKey) || "gly".equals(roleKey)) {
                     canDelete = true;
+                    break;
                 }
             }
         }
 
         // Regular users can only see their own records, users who can view all can search all users
+        // Managers can view all records in their department
         String usernameParam = null;
-        if (!canViewAll) {
+        List<String> usernameList = null;  // List of usernames for department filter
+
+        // If user is a manager (jl), get all users in their department
+        if (canViewDept && currentUser.getDept() != null && currentUser.getDept().getDeptId() != null) {
+            Long currentDeptId = currentUser.getDept().getDeptId();
+            SysUser deptQuery = new SysUser();
+            deptQuery.setDeptId(currentDeptId);
+            List<SysUser> deptUsers = userService.selectUserList(deptQuery);
+            if (deptUsers != null && !deptUsers.isEmpty()) {
+                usernameList = new ArrayList<>();
+                for (SysUser u : deptUsers) {
+                    usernameList.add(u.getLoginName());
+                }
+            }
+            logger.info("经理 {} 查询本部门 {} 的打卡记录，共 {} 名员工", currentUser.getUserName(), currentUser.getDept().getDeptName(), usernameList != null ? usernameList.size() : 0);
+        }
+
+        // Handle department filter: if dept is provided, get all users in that dept
+        // Note: Only admin/gly/hr users can manually select department to filter
+        if (dept != null && !dept.isEmpty() && canViewAll) {
+            // Query users in the manually selected department
+            SysUser queryUser = new SysUser();
+            SysUser deptQuery = new SysUser();
+            // Find dept by name and set dept_id
+            List<SysDept> allDepts = deptService.selectDeptList(new SysDept());
+            Long deptId = null;
+            if (allDepts != null) {
+                for (SysDept d : allDepts) {
+                    if (dept.equals(d.getDeptName())) {
+                        deptId = d.getDeptId();
+                        break;
+                    }
+                }
+            }
+            if (deptId != null) {
+                deptQuery.setDeptId(deptId);
+                List<SysUser> deptUsers = userService.selectUserList(deptQuery);
+                if (deptUsers != null && !deptUsers.isEmpty()) {
+                    usernameList = new ArrayList<>();
+                    for (SysUser u : deptUsers) {
+                        usernameList.add(u.getLoginName());
+                    }
+                }
+            }
+        }
+
+        // Determine what records to query
+        if (!canViewAll && !canViewDept) {
+            // Regular user: can only see their own records
             usernameParam = currentUser.getUserName();
-        } else if (username != null && !username.isEmpty()) {
-            // User with view-all permission searching for specific username
-            usernameParam = username;
+            logger.info("普通用户 {} 只能查看自己的打卡记录", currentUser.getUserName());
+        } else if (usernameList != null && !usernameList.isEmpty()) {
+            // Manager (jl) or admin with department filter: will handle by filtering after query
+            usernameParam = "";
+        } else if (canViewAll) {
+            // Admin/gly/hr without specific filter: get all records
+            if (username != null && !username.isEmpty()) {
+                usernameParam = username;
+            } else {
+                usernameParam = "";
+            }
         }
 
         try {
@@ -118,19 +181,12 @@ public class AttendanceController extends BaseController {
             requestBody.put("size", 100);
             if (usernameParam != null && !usernameParam.isEmpty()) {
                 requestBody.put("username", usernameParam);
-            } else if (username != null && !username.isEmpty()) {
-                // Admin user searching for specific username
-                requestBody.put("username", username);
             } else {
                 // Admin user without username filter - send empty to get all
                 requestBody.put("username", "");
             }
             // Optional: add address filter if needed
             requestBody.put("address", "");
-            // Add dept filter if provided
-            if (dept != null && !dept.isEmpty()) {
-                requestBody.put("dept", dept);
-            }
             // Date range filtering
             if (startTime != null && !startTime.isEmpty()) {
                 requestBody.put("startTime", startTime);
@@ -157,9 +213,15 @@ public class AttendanceController extends BaseController {
                 List<Map<String, Object>> convertedRecords = new ArrayList<>();
                 if (records != null) {
                     for (Map<String, Object> record : records) {
+                        String recordUsername = (String) record.get("username");
+
+                        // Apply department filter if usernameList is set
+                        if (usernameList != null && !usernameList.isEmpty() && !usernameList.contains(recordUsername)) {
+                            continue;  // Skip this record if username not in department
+                        }
+
                         Map<String, Object> map = new java.util.HashMap<>();
                         map.put("id", record.get("id"));
-                        String recordUsername = (String) record.get("username");
                         map.put("username", recordUsername);
 
                         // Get dept name from database if not in cache
@@ -195,11 +257,14 @@ public class AttendanceController extends BaseController {
                     }
                 }
                 rspData.setRows(convertedRecords);
-                Object total = response.get("total");
-                rspData.setTotal(total != null ? Long.parseLong(total.toString()) : 0);
+                // If department filter was applied, use actual filtered count
+                long actualTotal = convertedRecords.size();
+                rspData.setTotal(actualTotal);
+                logger.info("查询打卡记录成功，返回 {} 条记录", actualTotal);
             } else {
                 rspData.setRows(new ArrayList<>());
                 rspData.setTotal(0);
+                logger.info("查询打卡记录成功，无数据");
             }
 
             return rspData;
@@ -231,8 +296,8 @@ public class AttendanceController extends BaseController {
         if (currentUser.getRoles() != null && !currentUser.getRoles().isEmpty()) {
             for (SysRole role : currentUser.getRoles()) {
                 String roleKey = role.getRoleKey();
-                // Admin or dept manager can delete records
-                if ("admin".equals(roleKey) || "gly".equals(roleKey) || "hr".equals(roleKey) || "jl".equals(roleKey)) {
+                // Admin and gly can delete records
+                if ("admin".equals(roleKey) || "gly".equals(roleKey)) {
                     canDelete = true;
                     break;
                 }
@@ -244,20 +309,11 @@ public class AttendanceController extends BaseController {
         }
 
         try {
-            RestTemplate restTemplate = new RestTemplate();
-            String url = "http://localhost:8088/signinfo/delete?id=" + id;
-
-            // Call 8088 service to delete
-            @SuppressWarnings("unchecked")
-            Map<String, Object> response = restTemplate.getForObject(url, Map.class);
-
-            Integer code = (Integer) response.get("code");
-            String result = (String) response.get("result");
-
-            if (code != null && code == 0 && "success".equals(result)) {
+            int result = signinfoMapper.deleteById(id);
+            if (result > 0) {
                 return AjaxResult.success();
             } else {
-                return AjaxResult.error("删除失败");
+                return AjaxResult.error("删除失败，记录不存在");
             }
         } catch (Exception e) {
             logger.error("删除打卡记录失败", e);

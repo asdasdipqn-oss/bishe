@@ -21,6 +21,7 @@ com/renli/system/domain/CsAttendanceYgexception.class
 com/renli/system/service/ICsLeaveYgapplicationService.class
 com/renli/system/service/impl/SysMenuServiceImpl.class
 com/renli/system/mapper/CsTrainingNoticeMapper.class
+com/renli/system/domain/Signinfo.class
 com/renli/system/service/impl/CsAttendanceJlexceptionServiceImpl.class
 com/renli/system/controller/CsRecruitmentPostController.class
 com/renli/system/service/impl/CsTrainingNoticeServiceImpl.class
@@ -31,6 +32,7 @@ com/renli/system/service/impl/CsTrainingPlanServiceImpl.class
 com/renli/system/domain/CsAttendanceJlexception.class
 com/renli/system/service/impl/SysLogininforServiceImpl.class
 com/renli/system/domain/CsEvaluationScheme.class
+com/renli/system/mapper/SigninfoMapper.class
 com/renli/system/domain/CsAttendanceRule.class
 com/renli/system/service/impl/CsResumeScreeningServiceImpl.class
 com/renli/system/mapper/CsDeptTrainingHrrequestMapper.class

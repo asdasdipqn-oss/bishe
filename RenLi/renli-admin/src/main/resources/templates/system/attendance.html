@@ -210,11 +210,6 @@
                     <label>部门</label>
                     <select id="dept" class="form-control" style="width: 120px;">
                         <option value="">全部部门</option>
-                        <option value="研发部">研发部</option>
-                        <option value="市场部">市场部</option>
-                        <option value="销售部">销售部</option>
-                        <option value="财务部">财务部</option>
-                        <option value="人事部">人事部</option>
                     </select>
                 </div>
                 <div class="search-item">
@@ -288,6 +283,22 @@
     var totalCount = 0;
     var allRecords = [];
     var filteredRecords = [];
+
+    // 加载部门列表
+    function loadDepts() {
+        $.get('/system/attendance/depts', function(result) {
+            if (result.code == 0 && result.data) {
+                var deptSelect = $('#dept');
+                deptSelect.empty();
+                deptSelect.append('<option value="">全部部门</option>');
+                result.data.forEach(function(dept) {
+                    deptSelect.append('<option value="' + dept.deptName + '">' + dept.deptName + '</option>');
+                });
+            }
+        }).fail(function() {
+            console.error('加载部门列表失败');
+        });
+    }
 
     function goTo8080() {
         window.open('http://localhost:8080', '_blank');
@@ -440,6 +451,7 @@
     }
 
     $(function() {
+        loadDepts();
         searchRecords();
     });
 </script>

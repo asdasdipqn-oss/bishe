@@ -3,11 +3,13 @@ package com.renli.web.controller.system;
 import com.renli.common.config.RuoYiConfig;
 import com.renli.common.core.controller.BaseController;
 import com.renli.common.core.domain.AjaxResult;
+import com.renli.common.core.domain.entity.SysDept;
 import com.renli.common.core.domain.entity.SysRole;
 import com.renli.common.core.domain.entity.SysUser;
 import com.renli.common.core.page.TableDataInfo;
 import com.renli.system.domain.Signinfo;
 import com.renli.system.mapper.SigninfoMapper;
+import com.renli.system.service.ISysDeptService;
 import com.renli.system.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,11 +39,29 @@ public class AttendanceController extends BaseController {
     private ISysUserService userService;
 
     @Autowired
+    private ISysDeptService deptService;
+
+    @Autowired
     private SigninfoMapper signinfoMapper;
 
     @GetMapping("")
     public String index() {
         return "system/attendance";
+    }
+
+    /**
+     * 获取部门列表
+     */
+    @GetMapping("/depts")
+    @ResponseBody
+    public AjaxResult getDepts() {
+        try {
+            List<SysDept> deptList = deptService.selectDeptList(new SysDept());
+            return AjaxResult.success(deptList);
+        } catch (Exception e) {
+            logger.error("获取部门列表失败", e);
+            return AjaxResult.error("获取部门列表失败");
+        }
     }
 
     @PostMapping("/data")

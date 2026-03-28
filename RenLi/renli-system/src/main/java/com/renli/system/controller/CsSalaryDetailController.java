@@ -44,33 +44,23 @@ public class CsSalaryDetailController extends BaseController
     {
         SysUser currentUser = getSysUser();
         List<SysRole> roles = currentUser.getRoles();
-        
+
         boolean isNormalUser = true;
-        boolean isDeptManager = false;
-        
+
         if (roles != null) {
             for (SysRole role : roles) {
                 String roleKey = role.getRoleKey();
-                if ("jl".equals(roleKey)) {
-                    isDeptManager = true;
-                    isNormalUser = false;
-                    break;
-                }
-                else if ("admin".equals(roleKey) || "gly".equals(roleKey) || "hr".equals(roleKey)) {
+                if (!("admin".equals(roleKey) || "gly".equals(roleKey))) {
                     isNormalUser = false;
                     break;
                 }
             }
         }
-        
+
         if (isNormalUser) {
             csSalaryDetail.setEmployee(currentUser.getUserName());
         }
-        else if (isDeptManager) {
-            csSalaryDetail.setDept(currentUser.getDept().getDeptName());
-        }
-        
-        startPage();
+
         List<CsSalaryDetail> list = csSalaryDetailService.selectCsSalaryDetailList(csSalaryDetail);
         return getDataTable(list);
     }
@@ -101,14 +91,11 @@ public class CsSalaryDetailController extends BaseController
                 }
             }
         }
-        
+
         if (isNormalUser) {
             csSalaryDetail.setEmployee(currentUser.getUserName());
         }
-        else if (isDeptManager) {
-            csSalaryDetail.setDept(currentUser.getDept().getDeptName());
-        }
-        
+
         List<CsSalaryDetail> list = csSalaryDetailService.selectCsSalaryDetailList(csSalaryDetail);
         ExcelUtil<CsSalaryDetail> util = new ExcelUtil<CsSalaryDetail>(CsSalaryDetail.class);
         return util.exportExcel(list, "薪资明细数据");

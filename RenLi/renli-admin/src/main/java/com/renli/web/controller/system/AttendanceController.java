@@ -251,8 +251,10 @@ public class AttendanceController extends BaseController {
             @SuppressWarnings("unchecked")
             Map<String, Object> response = restTemplate.getForObject(url, Map.class);
 
+            Integer code = (Integer) response.get("code");
             String result = (String) response.get("result");
-            if ("success".equals(result)) {
+
+            if (code != null && code == 0 && "success".equals(result)) {
                 return AjaxResult.success();
             } else {
                 return AjaxResult.error("删除失败");

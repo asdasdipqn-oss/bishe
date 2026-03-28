@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -100,13 +101,25 @@ public class SigninfoController {
      * @return
      */
     @PostMapping("/delete")
-    public String delete(@RequestParam Long id) {
+    public Map<String, Object> delete(@RequestParam Long id) {
+        Map<String, Object> result = new java.util.HashMap<>();
         try {
-            boolean result = signinfoService.removeById(id);
-            return result ? "success" : "fail";
+            boolean deleted = signinfoService.removeById(id);
+            if (deleted) {
+                result.put("code", 0);
+                result.put("msg", "删除成功");
+                result.put("result", "success");
+            } else {
+                result.put("code", 500);
+                result.put("msg", "删除失败，记录不存在");
+                result.put("result", "fail");
+            }
         } catch (Exception e) {
             e.printStackTrace();
-            return "fail";
+            result.put("code", 500);
+            result.put("msg", "删除失败");
+            result.put("result", "fail");
         }
+        return result;
     }
 }

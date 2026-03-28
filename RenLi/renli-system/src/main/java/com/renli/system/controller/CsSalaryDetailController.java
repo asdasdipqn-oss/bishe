@@ -45,19 +45,20 @@ public class CsSalaryDetailController extends BaseController
         SysUser currentUser = getSysUser();
         List<SysRole> roles = currentUser.getRoles();
 
-        boolean isNormalUser = true;
+        boolean isAdminOrGly = false;
 
         if (roles != null) {
             for (SysRole role : roles) {
                 String roleKey = role.getRoleKey();
-                if (!("admin".equals(roleKey) || "gly".equals(roleKey))) {
-                    isNormalUser = false;
+                if ("admin".equals(roleKey) || "gly".equals(roleKey)) {
+                    isAdminOrGly = true;
                     break;
                 }
             }
         }
 
-        if (isNormalUser) {
+        // 普通用户只能查看自己的薪资明细
+        if (!isAdminOrGly) {
             csSalaryDetail.setEmployee(currentUser.getUserName());
         }
 
@@ -73,26 +74,21 @@ public class CsSalaryDetailController extends BaseController
     {
         SysUser currentUser = getSysUser();
         List<SysRole> roles = currentUser.getRoles();
-        
-        boolean isNormalUser = true;
-        boolean isDeptManager = false;
-        
+
+        boolean isAdminOrGly = false;
+
         if (roles != null) {
             for (SysRole role : roles) {
                 String roleKey = role.getRoleKey();
-                if ("jl".equals(roleKey)) {
-                    isDeptManager = true;
-                    isNormalUser = false;
-                    break;
-                }
-                else if ("admin".equals(roleKey) || "gly".equals(roleKey) || "hr".equals(roleKey)) {
-                    isNormalUser = false;
+                if ("admin".equals(roleKey) || "gly".equals(roleKey)) {
+                    isAdminOrGly = true;
                     break;
                 }
             }
         }
 
-        if (isNormalUser) {
+        // 普通用户只能导出自己的薪资明细
+        if (!isAdminOrGly) {
             csSalaryDetail.setEmployee(currentUser.getUserName());
         }
 

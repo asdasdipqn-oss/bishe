@@ -1,5 +1,7 @@
 package com.liefox.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 
 /**
@@ -10,27 +12,30 @@ import java.io.Serializable;
  * @author LIEFox
  * @since 2021-06-19
  */
+@TableName("signinfo")
 public class Signinfo {
-
+    private Long id;
     private String username;
-
     private String temperature;
-
     private String address;
-
     private String date;
-
-    private String dept;
 
     public Signinfo() {
     }
 
-    public Signinfo(String username, String temperature, String address, String date, String dept) {
+    public Signinfo(String username, String temperature, String address, String date) {
         this.username = username;
         this.temperature = temperature;
         this.address = address;
         this.date = date;
-        this.dept = dept;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -63,13 +68,5 @@ public class Signinfo {
 
     public void setDate(String date) {
         this.date = date;
-    }
-
-    public String getDept() {
-        return dept;
-    }
-
-    public void setDept(String dept) {
-        this.dept = dept;
     }
 }

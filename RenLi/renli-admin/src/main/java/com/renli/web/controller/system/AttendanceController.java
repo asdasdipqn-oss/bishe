@@ -80,6 +80,7 @@ public class AttendanceController extends BaseController {
         // Check if current user is admin or dept manager
         boolean isAdmin = false;
         boolean canViewAll = false;
+        boolean canDelete = false;
         if (currentUser.getRoles() != null && !currentUser.getRoles().isEmpty()) {
             for (SysRole role : currentUser.getRoles()) {
                 String roleKey = role.getRoleKey();
@@ -90,7 +91,10 @@ public class AttendanceController extends BaseController {
                 // Admin or dept manager can view all records
                 if ("admin".equals(roleKey) || "gly".equals(roleKey) || "hr".equals(roleKey) || "jl".equals(roleKey)) {
                     canViewAll = true;
-                    break;
+                }
+                // Only admin and gly can delete records
+                if ("admin".equals(roleKey) || "gly".equals(roleKey)) {
+                    canDelete = true;
                 }
             }
         }
@@ -160,19 +164,19 @@ public class AttendanceController extends BaseController {
 
                         // Get dept name from database if not in cache
                         String deptName = userDeptCache.get(recordUsername);
-                        boolean canDelete = false;
                         if (deptName == null) {
                             SysUser recordUser = userService.selectUserByLoginName(recordUsername);
+                            boolean isAdminUser = false;
                             if (recordUser != null && recordUser.getRoles() != null && !recordUser.getRoles().isEmpty()) {
                                 for (SysRole role : recordUser.getRoles()) {
                                     String roleKey = role.getRoleKey();
                                     if ("admin".equals(roleKey) || "gly".equals(roleKey)) {
-                                        canDelete = true;
+                                        isAdminUser = true;
                                         break;
                                     }
                                 }
                             }
-                            if (canDelete) {
+                            if (isAdminUser) {
                                 deptName = "管理员";
                             } else if (recordUser != null && recordUser.getDept() != null) {
                                 deptName = recordUser.getDept().getDeptName();

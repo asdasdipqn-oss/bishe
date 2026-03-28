@@ -244,11 +244,18 @@ public class AttendanceController extends BaseController {
         }
 
         try {
-            int result = signinfoMapper.deleteById(id);
-            if (result > 0) {
+            RestTemplate restTemplate = new RestTemplate();
+            String url = "http://localhost:8088/signinfo/delete?id=" + id;
+
+            // Call 8088 service to delete
+            @SuppressWarnings("unchecked")
+            Map<String, Object> response = restTemplate.getForObject(url, Map.class);
+
+            String result = (String) response.get("result");
+            if ("success".equals(result)) {
                 return AjaxResult.success();
             } else {
-                return AjaxResult.error("删除失败，记录不存在");
+                return AjaxResult.error("删除失败");
             }
         } catch (Exception e) {
             logger.error("删除打卡记录失败", e);

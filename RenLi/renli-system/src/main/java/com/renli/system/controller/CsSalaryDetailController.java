@@ -20,6 +20,8 @@ import com.renli.common.utils.poi.ExcelUtil;
 import com.renli.common.core.page.TableDataInfo;
 import com.renli.common.core.domain.entity.SysUser;
 import com.renli.common.core.domain.entity.SysRole;
+import com.renli.common.core.domain.entity.SysDept;
+import com.renli.system.service.ISysDeptService;
 
 @Controller
 @RequestMapping("/system/detail")
@@ -29,6 +31,9 @@ public class CsSalaryDetailController extends BaseController
 
     @Autowired
     private ICsSalaryDetailService csSalaryDetailService;
+
+    @Autowired
+    private ISysDeptService deptService;
 
     @RequiresPermissions("system:detail:view")
     @GetMapping()
@@ -101,6 +106,22 @@ public class CsSalaryDetailController extends BaseController
     public String add()
     {
         return prefix + "/add";
+    }
+
+    /**
+     * 获取部门列表
+     */
+    @GetMapping("/depts")
+    @ResponseBody
+    public AjaxResult getDepts()
+    {
+        try {
+            List<SysDept> deptList = deptService.selectDeptList(new SysDept());
+            return AjaxResult.success(deptList);
+        } catch (Exception e) {
+            logger.error("获取部门列表失败", e);
+            return AjaxResult.error("获取部门列表失败");
+        }
     }
 
     @RequiresPermissions("system:detail:add")

@@ -1,6 +1,8 @@
 package com.renli.system.controller;
 
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -142,6 +144,17 @@ public class CsAttendanceYgexceptionController extends BaseController
     public AjaxResult getCurrentUserInfo()
     {
         SysUser currentUser = getSysUser();
+        logger.info("===== getCurrentUserInfo 开始 (考勤异常) =====");
+        logger.info("当前用户ID: {}", currentUser.getUserId());
+        logger.info("当前用户名: {}", currentUser.getUserName());
+        logger.info("当前用户部门对象: {}", currentUser.getDept());
+        logger.info("当前用户部门ID: {}", currentUser.getDeptId());
+        if (currentUser.getDept() != null) {
+            logger.info("当前用户部门名: {}", currentUser.getDept().getDeptName());
+        } else {
+            logger.info("当前用户部门为NULL");
+        }
+
         Map<String, Object> userInfo = new java.util.HashMap<>();
         userInfo.put("userName", currentUser.getUserName());
         if (currentUser.getDept() != null) {
@@ -149,6 +162,8 @@ public class CsAttendanceYgexceptionController extends BaseController
         } else {
             userInfo.put("deptName", null);
         }
+        logger.info("返回用户信息: {}", userInfo);
+        logger.info("===== getCurrentUserInfo 结束 =====");
         return AjaxResult.success(userInfo);
     }
 

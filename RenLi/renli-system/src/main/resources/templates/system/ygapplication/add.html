@@ -68,19 +68,25 @@
     <th:block th:include="include :: datetimepicker-js" />
     <th:block th:include="include :: summernote-js" />
     <script th:inline="javascript">
-        var prefix = ctx + "system/ygapplication"
+        var prefix = ctx + "/system/ygapplication"
 
         // 页面加载时自动填充员工和部门信息
         function loadCurrentUserInfo() {
-            $.get(ctx + '/system/user/getCurrentUserInfo', function(result) {
+            console.log('开始获取用户信息...');
+            $.get(prefix + '/getCurrentUserInfo', function(result) {
+                console.log('获取用户信息响应:', result);
                 if (result.code == 0 && result.data) {
+                    console.log('设置员工名:', result.data.userName);
                     $('#employee').val(result.data.userName);
                     if (result.data.deptName) {
+                        console.log('设置部门:', result.data.deptName);
                         $('#dept').val(result.data.deptName);
                     }
+                } else {
+                    console.warn('返回结果异常:', result);
                 }
-            }).fail(function() {
-                console.error('获取用户信息失败');
+            }).fail(function(xhr, status, error) {
+                console.error('获取用户信息失败:', status, error);
             });
         }
 
@@ -98,51 +104,53 @@
             // 加载当前用户信息
             loadCurrentUserInfo();
 
-        $("input[name='startTime']").datetimepicker({
-            format: "yyyy-mm-dd",
-            minView: "month",
-            autoclose: true
-        });
+            $("input[name='startTime']").datetimepicker({
+                format: "yyyy-mm-dd",
+                minView: "month",
+                autoclose: true
+            });
 
-        $("input[name='endTime']").datetimepicker({
-            format: "yyyy-mm-dd",
-            minView: "month",
-            autoclose: true
-        });
+            $("input[name='endTime']").datetimepicker({
+                format: "yyyy-mm-dd",
+                minView: "month",
+                autoclose: true
+            });
 
-        $(function() {
-            $('.summernote').summernote({
-                lang: 'zh-CN',
-                dialogsInBody: true,
-                callbacks: {
-                    onChange: function(contents, $edittable) {
-                        $("input[name='" + this.id + "']").val(contents);
-                    },
-                    onImageUpload: function(files) {
-                        var obj = this;
-                    	var data = new FormData();
-                    	data.append("file", files[0]);
-                    	$.ajax({
-                            type: "post",
-                            url: ctx + "common/upload",
-                    		data: data,
-                    		cache: false,
-                    		contentType: false,
-                    		processData: false,
-                    		dataType: 'json',
-                    		success: function(result) {
-                    		    if (result.code == web_status.SUCCESS) {
-                    		        $('#' + obj.id).summernote('insertImage', result.url);
-                    		    } else {
-                    		        $.modal.alertError(result.msg);
-                    		    }
-                    		},
-                    		error: function(error) {
-                    		    $.modal.alertWarning("图片上传失败。");
-                    		}
-                    	});
+            $('.summernote').each(function(i) {
+                var id = $(this).attr('id');
+                $('#' + id).summernote({
+                    lang: 'zh-CN',
+                    dialogsInBody: true,
+                    callbacks: {
+                        onChange: function(contents, $edittable) {
+                            $("input[name='" + id + "']").val(contents);
+                        },
+                        onImageUpload: function(files) {
+                            var obj = this;
+                            var data = new FormData();
+                            data.append("file", files[0]);
+                            $.ajax({
+                                type: "post",
+                                url: ctx + "common/upload",
+                                data: data,
+                                cache: false,
+                                contentType: false,
+                                processData: false,
+                                dataType: 'json',
+                                success: function(result) {
+                                    if (result.code == web_status.SUCCESS) {
+                                        $('#' + id).summernote('insertImage', result.url);
+                                    } else {
+                                        $.modal.alertError(result.msg);
+                                    }
+                                },
+                                error: function(error) {
+                                    $.modal.alertWarning("图片上传失败。");
+                                }
+                            });
+                        }
                     }
-                }
+                });
             });
         });
     </script>

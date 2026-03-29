@@ -126,7 +126,30 @@ public class CsAttendanceYgexceptionController extends BaseController
     @ResponseBody
     public AjaxResult addSave(CsAttendanceYgexception csAttendanceYgexception)
     {
+        SysUser currentUser = getSysUser();
+        csAttendanceYgexception.setEmployee(currentUser.getUserName());
+        if (currentUser.getDept() != null) {
+            csAttendanceYgexception.setDept(currentUser.getDept().getDeptName());
+        }
         return toAjax(csAttendanceYgexceptionService.insertCsAttendanceYgexception(csAttendanceYgexception));
+    }
+
+    /**
+     * 获取当前用户信息（用于前端自动填充员工和部门）
+     */
+    @GetMapping("/getCurrentUserInfo")
+    @ResponseBody
+    public AjaxResult getCurrentUserInfo()
+    {
+        SysUser currentUser = getSysUser();
+        Map<String, Object> userInfo = new java.util.HashMap<>();
+        userInfo.put("userName", currentUser.getUserName());
+        if (currentUser.getDept() != null) {
+            userInfo.put("deptName", currentUser.getDept().getDeptName());
+        } else {
+            userInfo.put("deptName", null);
+        }
+        return AjaxResult.success(userInfo);
     }
 
     @RequiresPermissions("system:ygexception:edit")

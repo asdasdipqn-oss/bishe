@@ -131,6 +131,24 @@ public class CsLeaveYgapplicationController extends BaseController
     }
 
     /**
+     * 获取当前用户信息（用于前端自动填充员工和部门）
+     */
+    @GetMapping("/getCurrentUserInfo")
+    @ResponseBody
+    public AjaxResult getCurrentUserInfo()
+    {
+        SysUser currentUser = getSysUser();
+        Map<String, Object> userInfo = new java.util.HashMap<>();
+        userInfo.put("userName", currentUser.getUserName());
+        if (currentUser.getDept() != null) {
+            userInfo.put("deptName", currentUser.getDept().getDeptName());
+        } else {
+            userInfo.put("deptName", null);
+        }
+        return AjaxResult.success(userInfo);
+    }
+
+    /**
      * 修改假期申请
      */
     @RequiresPermissions("system:ygapplication:edit")

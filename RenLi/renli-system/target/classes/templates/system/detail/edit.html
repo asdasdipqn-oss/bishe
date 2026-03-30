@@ -14,16 +14,20 @@
                     <input name="employee" th:field="*{employee}" class="form-control" type="text" required>
                 </div>
             </div>
-            <div class="form-group">    
+            <div class="form-group">
                 <label class="col-sm-3 control-label is-required">部门：</label>
                 <div class="col-sm-8">
-                    <input name="dept" th:field="*{dept}" class="form-control" type="text" required>
+                    <select name="dept" class="form-control" required>
+                        <option value="">请选择部门</option>
+                    </select>
                 </div>
             </div>
-            <div class="form-group">    
+            <div class="form-group">
                 <label class="col-sm-3 control-label is-required">薪资月份：</label>
                 <div class="col-sm-8">
-                    <input name="salaryMonth" th:field="*{salaryMonth}" class="form-control" type="text" required>
+                    <select name="salaryMonth" class="form-control" required>
+                        <option value="">请选择月份</option>
+                    </select>
                 </div>
             </div>
             <div class="form-group">    
@@ -69,6 +73,8 @@
     <th:block th:include="include :: summernote-js" />
     <script th:inline="javascript">
         var prefix = ctx + "system/detail";
+        var currentDept = /*[[${csSalaryDetail.dept}]]*/ '';
+
         $("#form-detail-edit").validate({
             focusCleanup: true
         });
@@ -79,7 +85,42 @@
             }
         }
 
+        // 加载部门列表
+        function loadDepts() {
+            $.get(prefix + '/depts', function(result) {
+                if (result.code == 0 && result.data) {
+                    var deptSelect = $('select[name="dept"]');
+                    deptSelect.empty();
+                    deptSelect.append('<option value="">请选择部门</option>');
+                    result.data.forEach(function(dept) {
+                        deptSelect.append('<option value="' + dept.deptName + '">' + dept.deptName + '</option>');
+                    });
+                    // 设置当前选中值
+                    if (currentDept) {
+                        deptSelect.val(currentDept);
+                    }
+                }
+            }).fail(function() {
+                console.error('加载部门列表失败');
+            });
+        }
+
+        // 加载月份列表（1-12月）
+        function loadMonths() {
+            var monthSelect = $('select[name="salaryMonth"]');
+            monthSelect.empty();
+            monthSelect.append('<option value="">请选择月份</option>');
+            for (var i = 1; i <= 12; i++) {
+                monthSelect.append('<option value="' + i + '月">' + i + '月</option>');
+            }
+        }
+
         $(function() {
+            // 加载部门列表
+            loadDepts();
+            // 加载月份列表
+            loadMonths();
+
             $('.summernote').each(function(i) {
                 $('#' + this.id).summernote({
                     lang: 'zh-CN',

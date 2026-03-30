@@ -17,6 +17,11 @@
 								岗位名称：<input type="text" name="postName"/>
 							</li>
 							<li>
+								所属部门：<select id="deptId" name="deptId">
+									<option value="">所有</option>
+								</select>
+							</li>
+							<li>
 								岗位状态：<select name="status" th:with="type=${@dict.getType('sys_normal_disable')}">
 									<option value="">所有</option>
 									<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
@@ -58,6 +63,17 @@
 		var datas = [[${@dict.getType('sys_normal_disable')}]];
 		var prefix = ctx + "system/post";
 
+		// 加载部门列表
+		$.get(prefix + "/deptList", function(data) {
+			if (data.code === 0) {
+				var deptList = data.data;
+				$("#deptId").append('<option value="">所有</option>');
+				$.each(deptList, function(index, dept) {
+					$("#deptId").append('<option value="' + dept.deptId + '">' + dept.deptName + '</option>');
+				});
+			}
+		});
+
 		$(function() {
 		    var options = {
 		        url: prefix + "/list",
@@ -82,6 +98,11 @@
 		        {
 		            field: 'postName',
 		            title: '岗位名称',
+		            sortable: true
+		        },
+		        {
+		            field: 'deptName',
+		            title: '所属部门',
 		            sortable: true
 		        },
 		        {

@@ -36,6 +36,13 @@ public class SysPost extends BaseEntity
     @Excel(name = "状态", readConverterExp = "0=正常,1=停用")
     private String status;
 
+    /** 部门ID */
+    private Long deptId;
+
+    /** 部门名称 */
+    @Excel(name = "部门名称")
+    private String deptName;
+
     /** 用户是否存在此岗位标识 默认不存在 */
     private boolean flag = false;
 
@@ -94,6 +101,26 @@ public class SysPost extends BaseEntity
         this.status = status;
     }
 
+    public Long getDeptId()
+    {
+        return deptId;
+    }
+
+    public void setDeptId(Long deptId)
+    {
+        this.deptId = deptId;
+    }
+
+    public String getDeptName()
+    {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName)
+    {
+        this.deptName = deptName;
+    }
+
     public boolean isFlag()
     {
         return flag;
@@ -112,6 +139,7 @@ public class SysPost extends BaseEntity
             .append("postName", getPostName())
             .append("postSort", getPostSort())
             .append("status", getStatus())
+            .append("deptId", getDeptId())
             .append("createBy", getCreateBy())
             .append("createTime", getCreateTime())
             .append("updateBy", getUpdateBy())

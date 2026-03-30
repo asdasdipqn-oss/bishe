@@ -7,6 +7,7 @@
 	<div class="wrapper wrapper-content animated fadeInRight ibox-content">
 		<form class="form-horizontal m" id="form-post-edit" th:object="${post}">
 			<input id="postId" name="postId" type="hidden" th:field="*{postId}"/>
+			<input id="postDeptIdHidden" type="hidden" th:value="*{deptId}"/>
 			<div class="form-group">
 				<label class="col-sm-3 control-label is-required">岗位名称：</label>
 				<div class="col-sm-8">
@@ -23,6 +24,14 @@
 				<label class="col-sm-3 control-label is-required">显示顺序：</label>
 				<div class="col-sm-8">
 					<input class="form-control" type="text" name="postSort" id="postSort" th:field="*{postSort}" required>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label is-required">所属部门：</label>
+				<div class="col-sm-8">
+					<select class="form-control" name="deptId" id="deptId" required>
+						<option value="">请选择部门</option>
+					</select>
 				</div>
 			</div>
 			<div class="form-group">
@@ -45,7 +54,20 @@
 	<th:block th:include="include :: footer" />
 	<script type="text/javascript">
 		var prefix = ctx + "system/post";
-		
+
+		// 加载部门列表
+		$.get(prefix + "/deptList", function(data) {
+			if (data.code === 0) {
+				var deptList = data.data;
+				var currentDeptId = $("#postDeptIdHidden").val();
+				$("#deptId").append('<option value="">请选择部门</option>');
+				$.each(deptList, function(index, dept) {
+					var selected = (dept.deptId == currentDeptId) ? 'selected' : '';
+					$("#deptId").append('<option value="' + dept.deptId + '" ' + selected + '>' + dept.deptName + '</option>');
+				});
+			}
+		});
+
 		$("#form-post-edit").validate({
 			onkeyup: false,
 			rules:{

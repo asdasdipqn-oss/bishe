@@ -15,10 +15,12 @@ import com.renli.common.annotation.Log;
 import com.renli.common.constant.UserConstants;
 import com.renli.common.core.controller.BaseController;
 import com.renli.common.core.domain.AjaxResult;
+import com.renli.common.core.domain.entity.SysDept;
 import com.renli.common.core.page.TableDataInfo;
 import com.renli.common.enums.BusinessType;
 import com.renli.common.utils.poi.ExcelUtil;
 import com.renli.system.domain.SysPost;
+import com.renli.system.service.ISysDeptService;
 import com.renli.system.service.ISysPostService;
 
 /**
@@ -34,6 +36,9 @@ public class SysPostController extends BaseController
 
     @Autowired
     private ISysPostService postService;
+
+    @Autowired
+    private ISysDeptService deptService;
 
     @RequiresPermissions("system:post:view")
     @GetMapping()
@@ -159,5 +164,32 @@ public class SysPostController extends BaseController
     public String checkPostCodeUnique(SysPost post)
     {
         return postService.checkPostCodeUnique(post);
+    }
+
+    /**
+     * 获取部门列表
+     */
+    @GetMapping("/deptList")
+    @ResponseBody
+    public AjaxResult deptList()
+    {
+        SysDept dept = new SysDept();
+        dept.setStatus("0"); // 只查询正常状态的部门
+        List<SysDept> deptList = deptService.selectDeptList(dept);
+        return success(deptList);
+    }
+
+    /**
+     * 根据部门ID获取岗位列表
+     */
+    @PostMapping("/listByDeptId")
+    @ResponseBody
+    public AjaxResult listByDeptId(Long deptId)
+    {
+        SysPost post = new SysPost();
+        post.setDeptId(deptId);
+        post.setStatus("0"); // 只查询正常状态的岗位
+        List<SysPost> postList = postService.selectPostList(post);
+        return success(postList);
     }
 }

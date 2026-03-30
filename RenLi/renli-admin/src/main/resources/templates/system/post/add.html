@@ -25,6 +25,14 @@
 				</div>
 			</div>
 			<div class="form-group">
+				<label class="col-sm-3 control-label is-required">所属部门：</label>
+				<div class="col-sm-8">
+					<select class="form-control" name="deptId" id="deptId" required>
+						<option value="">请选择部门</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
 				<label class="col-sm-3 control-label">岗位状态：</label>
 				<div class="col-sm-8">
 				    <div class="radio-box" th:each="dict : ${@dict.getType('sys_normal_disable')}">
@@ -44,7 +52,18 @@
 	<th:block th:include="include :: footer" />
 	<script type="text/javascript">
 		var prefix = ctx + "system/post";
-	    
+
+		// 加载部门列表
+		$.get(prefix + "/deptList", function(data) {
+			if (data.code === 0) {
+				var deptList = data.data;
+				$("#deptId").append('<option value="">请选择部门</option>');
+				$.each(deptList, function(index, dept) {
+					$("#deptId").append('<option value="' + dept.deptId + '">' + dept.deptName + '</option>');
+				});
+			}
+		});
+
 		$("#form-post-add").validate({
 			onkeyup: false,
 			rules:{

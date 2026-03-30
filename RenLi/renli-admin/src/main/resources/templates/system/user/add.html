@@ -140,7 +140,7 @@
       
     <div class="row">
         <div class="col-sm-offset-5 col-sm-10">
-            <button type="button" class="btn btn-sm btn-primary" onclick="submitHandler()"><i class="fa fa-check"></i>保 存</button>&nbsp;
+            <button type="button" class="btn btn-sm btn-primary" onclick="doSubmit()"><i class="fa fa-check"></i>保 存</button>&nbsp;
             <button type="button" class="btn btn-sm btn-danger" onclick="closeItem()"><i class="fa fa-reply-all"></i>关 闭 </button>
         </div>
     </div>
@@ -153,6 +153,7 @@
         	onkeyup: false,
         	rules:{
         		loginName:{
+        			required: true,
         			minlength: 2,
         			maxlength: 20,
         			remote: {
@@ -170,6 +171,7 @@
                     }
         		},
         		password:{
+        			required: true,
         			minlength: 5,
         			maxlength: 20
         		},
@@ -208,8 +210,12 @@
         	},
         	messages: {
                 "loginName": {
+                    required: "登录账号不能为空",
                     remote: "用户已经存在"
                 },
+        		"password": {
+        			required: "登录密码不能为空"
+        		},
         		"email": {
                     remote: "Email已经存在"
                 },
@@ -220,20 +226,90 @@
             focusCleanup: true
         });
         
-        function submitHandler() {
-        	var chrtype = [[${#strings.defaultString(@config.getKey('sys.account.chrtype'), 0)}]];
+        function doSubmit() {
+			// 调试输出 - 在表单验证前检查字段值
+			console.log("=== 表单验证前检查 ===");
+			console.log("loginName元素值：", $("#loginName").val());
+			console.log("loginName元素长度：", $("#loginName").val().length);
+			console.log("loginName是否为空：", $("#loginName").val() === "");
+			console.log("loginName trim后：", $.common.trim($("#loginName").val()));
+
+			if ($.validate.form()) {
+				console.log("=== 表单验证通过 ===");
+				console.log("验证后loginName值：", $("#loginName").val());
+				console.log("验证后password值：", $("#password").val());
+	        	var chrtype = [[${#strings.defaultString(@config.getKey('sys.account.chrtype'), 0)}]];
 			var password = $("#password").val();
-	        if ($.validate.form() && checkpwd(chrtype, password)) {
-	        	var data = $("#form-user-add").serializeArray();
 	        	var status = $("input[id='status']").is(':checked') == true ? 0 : 1;
 	        	var roleIds = $.form.selectCheckeds("role");
 	        	var postIds = $.form.selectSelects("post");
+
+	        	// 序列化表单获取所有字段值
+	        	var formData = $("#form-user-add").serializeArray();
+	        	var data = [];
+	        	// 添加表单字段值
+	        	$.each(formData, function(index, item) {
+	        		data.push({"name": item.name, "value": item.value});
+	        	});
+	        	// 添加额外字段（覆盖或补充）
 	        	data.push({"name": "status", "value": status});
 	        	data.push({"name": "roleIds", "value": roleIds});
 	        	data.push({"name": "postIds", "value": postIds});
+	        	console.log("准备调用$.operate.saveTab，data:", data);
 	        	$.operate.saveTab(prefix + "/add", data);
+	        	console.log("$.operate.saveTab调用后");
+	        	console.log("save后loginName值：", $("#loginName").val());
+	        	console.log("save后password值：", $("#password").val());
 	        }
 	    }
+
+        // 部门改变时刷新岗位列表
+        function loadPostsByDept() {
+            var deptId = $("#treeId").val();
+            console.log("当前部门ID：" + deptId);
+
+            $.ajax({
+                url: ctx + "system/post/listByDeptId",
+                type: "POST",
+                data: {deptId: deptId},
+                dataType: "json",
+                success: function(data) {
+                    if (data.code === 0) {
+                        var posts = data.data;
+                        var $postSelect = $("#post");
+                        // 清空当前选中值
+                        $postSelect.val(null).trigger('change');
+                        // 清空所有选项
+                        $postSelect.empty();
+                        if (posts && posts.length > 0) {
+                            $.each(posts, function(index, post) {
+                                var disabled = (post.status == '1') ? 'disabled' : '';
+                                var option = new Option(post.postName, post.postId);
+                                $(option).prop('disabled', disabled === 'disabled');
+                                $postSelect.append(option);
+                            });
+                        } else {
+                            var option = new Option("无可用岗位", "");
+                            $postSelect.append(option);
+                        }
+                        // 触发change事件更新select2显示
+                        $postSelect.trigger('change');
+                    } else {
+                        console.error("加载岗位失败：" + data.msg);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("请求岗位失败：" + error);
+                }
+            });
+        }
+
+        $(function() {
+            // 监听部门选择框变化
+            $("#treeName").on('change', function() {
+                loadPostsByDept();
+            });
+        })
          
         /* 用户管理-新增-选择部门树 */
         function selectDeptTree() {
@@ -244,24 +320,29 @@
 				title: '选择部门',
 				width: "380",
 				url: url,
-				callBack: doSubmit
+				callBack: doSelectDept
 			};
 			$.modal.openOptions(options);
 		}
 		
-		function doSubmit(index, layero){
+		function doSelectDept(index, layero){
 			var tree = layero.find("iframe")[0].contentWindow.$._tree;
 			var body = $.modal.getChildFrame(index);
    			$("#treeId").val(body.find('#treeId').val());
    			$("#treeName").val(body.find('#treeName').val());
    			$.modal.close(index);
+   			// 部门选择后刷新岗位列表
+   			loadPostsByDept();
 		}
 
-		$(function() {
+		$(document).ready(function() {
             $('#post').select2({
+                multiple: true,
                 placeholder: "请选择岗位",
                 allowClear: true
             });
+            // 初始加载岗位
+            loadPostsByDept();
         })
     </script>
 </body>

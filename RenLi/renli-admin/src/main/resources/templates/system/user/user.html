@@ -38,7 +38,7 @@
 									登录名称：<input type="text" name="loginName"/>
 								</li>
 								<li>
-									手机号码：<input type="text" name="phonenumber"/>
+									岗位：<input type="text" name="postName"/>
 								</li>
 								<li>
 									用户状态：<select name="status" th:with="type=${@dict.getType('sys_normal_disable')}">
@@ -146,13 +146,26 @@
 		            title: '部门'
 		        },
 		        {
+		            field: 'posts',
+		            title: '岗位',
+		            formatter: function(value, row, index) {
+		            	if (row.posts && row.posts.length > 0) {
+		            		return row.posts.map(function(post) {
+		            	    return post.postName;
+		            	}).join(', ');
+		            	}
+		            	return '-';
+		            }
+		        },
+		        {
 		            field: 'email',
 		            title: '邮箱',
 		            visible: false
 		        },
 		        {
 		            field: 'phonenumber',
-		            title: '手机'
+		            title: '手机',
+		            visible: false
 		        },
 		        {
 		        	visible: editFlag == 'hidden' ? false : true,

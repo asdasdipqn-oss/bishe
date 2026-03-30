@@ -55,6 +55,9 @@ public class SysUser extends BaseEntity
     @Excel(name = "手机号码")
     private String phonenumber;
 
+    /** 岗位名称（用于搜索） */
+    private String postName;
+
     /** 用户性别 */
     @Excel(name = "用户性别", readConverterExp = "0=男,1=女,2=未知")
     private String sex;
@@ -97,6 +100,9 @@ public class SysUser extends BaseEntity
 
     /** 角色组 */
     private Long[] roleIds;
+
+    /** 岗位对象 */
+    private List<?> posts;
 
     /** 岗位组 */
     private Long[] postIds;
@@ -217,6 +223,16 @@ public class SysUser extends BaseEntity
     public void setPhonenumber(String phonenumber)
     {
         this.phonenumber = phonenumber;
+    }
+
+    public String getPostName()
+    {
+        return postName;
+    }
+
+    public void setPostName(String postName)
+    {
+        this.postName = postName;
     }
 
     public String getSex()
@@ -352,6 +368,16 @@ public class SysUser extends BaseEntity
     public void setPostIds(Long[] postIds)
     {
         this.postIds = postIds;
+    }
+
+    public List<?> getPosts()
+    {
+        return posts;
+    }
+
+    public void setPosts(List<?> posts)
+    {
+        this.posts = posts;
     }
 
     @Override

@@ -28,6 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="remark"        column="remark"          />
 		<association property="dept"     column="dept_id" javaType="SysDept" resultMap="deptResult" />
 		<collection  property="roles"   javaType="java.util.List"        resultMap="RoleResult" />
+		<collection  property="posts"   javaType="java.util.List"        resultMap="PostResult" />
 	</resultMap>
 	
 	<resultMap id="deptResult" type="SysDept">
@@ -48,6 +49,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="dataScope"    column="data_scope"     />
 		<result property="status"       column="role_status"    />
 	</resultMap>
+
+	<resultMap id="PostResult" type="com.renli.system.domain.SysPost">
+		<id     property="postId"       column="post_id"        />
+		<result property="postCode"     column="post_code"      />
+		<result property="postName"     column="post_name"      />
+		<result property="postSort"     column="post_sort"      />
+		<result property="status"       column="post_status"    />
+	</resultMap>
 	
 	<sql id="selectUserVo">
         select  u.user_id, u.dept_id, u.login_name, u.user_name, u.user_type, u.email, u.avatar, u.phonenumber, u.sex, u.password, u.salt, u.status, u.del_flag, u.login_ip, u.login_date, u.pwd_update_date, u.create_time, u.remark,
@@ -60,8 +69,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 	
 	<select id="selectUserList" parameterType="SysUser" resultMap="SysUserResult">
-		select u.user_id, u.dept_id, u.login_name, u.user_name, u.user_type, u.email, u.avatar, u.phonenumber, u.password, u.sex, u.salt, u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark, d.dept_name, d.leader from sys_user u
+		select u.user_id, u.dept_id, u.login_name, u.user_name, u.user_type, u.email, u.avatar, u.phonenumber, u.password, u.sex, u.salt, u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark,
+		       d.dept_name, d.leader,
+		       p.post_id, p.post_code, p.post_name, p.post_sort, p.status as post_status
+		from sys_user u
 		left join sys_dept d on u.dept_id = d.dept_id
+		left join sys_user_post up on u.user_id = up.user_id
+		left join sys_post p on p.post_id = up.post_id
 		where u.del_flag = '0'
 		<if test="userId != null and userId != 0">
 			AND u.user_id = #{userId}
@@ -71,6 +85,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<if test="status != null and status != ''">
 			AND u.status = #{status}
+	</if>
+		<if test="postName != null and postName != ''">
+			AND p.post_name like concat('%', #{postName}, '%')
 		</if>
 		<if test="phonenumber != null and phonenumber != ''">
 			AND u.phonenumber like concat('%', #{phonenumber}, '%')

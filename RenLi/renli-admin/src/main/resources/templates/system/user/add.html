@@ -7,7 +7,6 @@
 <body>
     <div class="main-content">
         <form id="form-user-add" class="form-horizontal">
-            <input name="deptId" type="hidden" id="treeId"/>
             <h4 class="form-header h4">基本信息</h4>
             <div class="row">
             	<div class="col-sm-6">
@@ -20,12 +19,11 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label class="col-sm-4 control-label">归属部门：</label>
+                        <label class="col-sm-4 control-label is-required">归属部门：</label>
                         <div class="col-sm-8">
-                            <div class="input-group">
-                            	<input name="deptName" onclick="selectDeptTree()" id="treeName" type="text" placeholder="请选择归属部门" class="form-control">
-                                <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                            </div>
+                            <select name="deptId" id="treeId" class="form-control" required>
+                                <option value="">请选择部门</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -115,11 +113,12 @@
             <div class="row">
             	<div class="col-sm-12">
                     <div class="form-group">
-                        <label class="col-xs-2 control-label">角色：</label>
+                        <label class="col-xs-2 control-label is-required">角色：</label>
                         <div class="col-xs-10">
-                            <label th:each="role:${roles}" class="check-box">
-								<input name="role" type="checkbox" th:value="${role.roleId}" th:text="${role.roleName}" th:disabled="${role.status == '1'}">
-							</label>
+                            <select name="roleId" class="form-control m-b" required>
+								<option value="">请选择角色</option>
+								<option th:each="role:${roles}" th:value="${role.roleId}" th:text="${role.roleName}" th:disabled="${role.status == '1'}"></option>
+							</select>
                         </div>
                     </div>
                 </div>
@@ -207,6 +206,12 @@
                         }
                     }
         		},
+        		roleId:{
+        			required: true
+        		},
+        		treeId:{
+        			required: true
+        		},
         	},
         	messages: {
                 "loginName": {
@@ -221,6 +226,12 @@
                 },
         		"phonenumber":{
                 	remote: "手机号码已经存在"
+        		},
+        		"roleId":{
+                	required: "角色不能为空"
+        		},
+        		"treeId":{
+                	required: "归属部门不能为空"
         		}
             },
             focusCleanup: true
@@ -241,7 +252,7 @@
 	        	var chrtype = [[${#strings.defaultString(@config.getKey('sys.account.chrtype'), 0)}]];
 			var password = $("#password").val();
 	        	var status = $("input[id='status']").is(':checked') == true ? 0 : 1;
-	        	var roleIds = $.form.selectCheckeds("role");
+	        	var roleId = $("#roleId").val();
 	        	var postIds = $.form.selectSelects("post");
 
 	        	// 序列化表单获取所有字段值
@@ -253,7 +264,7 @@
 	        	});
 	        	// 添加额外字段（覆盖或补充）
 	        	data.push({"name": "status", "value": status});
-	        	data.push({"name": "roleIds", "value": roleIds});
+	        	data.push({"name": "roleId", "value": roleId});
 	        	data.push({"name": "postIds", "value": postIds});
 	        	console.log("准备调用$.operate.saveTab，data:", data);
 	        	$.operate.saveTab(prefix + "/add", data);
@@ -304,13 +315,36 @@
             });
         }
 
+        // 加载部门列表
+        function loadDeptList() {
+            $.get(ctx + "system/dept/treeData", function(data) {
+                var $deptSelect = $("#treeId");
+                $deptSelect.empty();
+                $deptSelect.append('<option value="">请选择部门</option>');
+                if (data && data.length > 0) {
+                    $.each(data, function(index, dept) {
+                        var option = new Option(dept.name, dept.id);
+                        $deptSelect.append(option);
+                    });
+                }
+            });
+        }
+
         $(function() {
-            // 监听部门选择框变化
-            $("#treeName").on('change', function() {
+            // 加载部门列表
+            loadDeptList();
+            // 初始化岗位下拉框
+            $('#post').select2({
+                multiple: true,
+                placeholder: "请选择岗位",
+                allowClear: true
+            });
+            // 监听部门选择框变化，刷新岗位列表
+            $("#treeId").on('change', function() {
                 loadPostsByDept();
             });
         })
-         
+
         /* 用户管理-新增-选择部门树 */
         function selectDeptTree() {
         	var treeId = $("#treeId").val();
@@ -324,26 +358,14 @@
 			};
 			$.modal.openOptions(options);
 		}
-		
+
 		function doSelectDept(index, layero){
 			var tree = layero.find("iframe")[0].contentWindow.$._tree;
 			var body = $.modal.getChildFrame(index);
    			$("#treeId").val(body.find('#treeId').val());
    			$("#treeName").val(body.find('#treeName').val());
    			$.modal.close(index);
-   			// 部门选择后刷新岗位列表
-   			loadPostsByDept();
 		}
-
-		$(document).ready(function() {
-            $('#post').select2({
-                multiple: true,
-                placeholder: "请选择岗位",
-                allowClear: true
-            });
-            // 初始加载岗位
-            loadPostsByDept();
-        })
     </script>
 </body>
 </html>

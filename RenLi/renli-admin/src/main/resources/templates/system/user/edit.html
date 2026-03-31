@@ -8,7 +8,7 @@
     <div class="main-content">
         <form class="form-horizontal" id="form-user-edit" th:object="${user}">
             <input name="userId"  type="hidden"  th:field="*{userId}" />
-			<input name="deptId"  type="hidden"  th:field="*{deptId}" id="treeId"/>
+            <input name="deptId"  type="hidden"  th:field="*{deptId}" id="treeIdOld"/>
             <h4 class="form-header h4">基本信息</h4>
             <div class="row">
             	<div class="col-sm-6">
@@ -23,10 +23,9 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label">归属部门：</label>
                         <div class="col-sm-8">
-                            <div class="input-group">
-                                <input class="form-control" type="text" name="deptName" onclick="selectDeptTree()" id="treeName" th:field="*{dept.deptName}">
-                            	<span class="input-group-addon"><i class="fa fa-search"></i></span>
-                            </div>
+                            <select name="deptId" id="treeId" class="form-control">
+                                <option value="">请选择部门</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -200,6 +199,66 @@
 	        }
 	    }
 
+        // 加载部门列表
+        function loadDeptList() {
+            $.get(ctx + "system/dept/treeData", function(data) {
+                var $deptSelect = $("#treeId");
+                var currentDeptId = $("#treeIdOld").val();
+                $deptSelect.empty();
+                $deptSelect.append('<option value="">请选择部门</option>');
+                if (data && data.length > 0) {
+                    $.each(data, function(index, dept) {
+                        var option = new Option(dept.name, dept.id);
+                        if (currentDeptId && dept.id == currentDeptId) {
+                            $(option).prop('selected', true);
+                        }
+                        $deptSelect.append(option);
+                    });
+                }
+            });
+        }
+
+        // 部门改变时刷新岗位列表
+        function loadPostsByDept() {
+            var deptId = $("#treeId").val();
+            console.log("当前部门ID：" + deptId);
+
+            $.ajax({
+                url: ctx + "system/post/listByDeptId",
+                type: "POST",
+                data: {deptId: deptId},
+                dataType: "json",
+                success: function(data) {
+                    if (data.code === 0) {
+                        var posts = data.data;
+                        var $postSelect = $("#post");
+                        // 清空当前选中值
+                        $postSelect.val(null).trigger('change');
+                        // 清空所有选项
+                        $postSelect.empty();
+                        if (posts && posts.length > 0) {
+                            $.each(posts, function(index, post) {
+                                var disabled = (post.status == '1') ? 'disabled' : '';
+                                var option = new Option(post.postName, post.postId);
+                                $(option).prop('disabled', disabled === 'disabled');
+                                $postSelect.append(option);
+                            });
+                        } else {
+                            var option = new Option("无可用岗位", "");
+                            $postSelect.append(option);
+                        }
+                        // 触发change事件更新select2显示
+                        $postSelect.trigger('change');
+                    } else {
+                        console.error("加载岗位失败：" + data.msg);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("请求岗位失败：" + error);
+                }
+            });
+        }
+
         /* 用户管理-修改-选择部门树 */
         function selectDeptTree() {
         	var deptId = $.common.isEmpty($("#treeId").val()) ? "100" : $("#treeId").val();
@@ -212,7 +271,7 @@
 			};
 			$.modal.openOptions(options);
 		}
-		
+
 		function doSubmit(index, layero){
 			var tree = layero.find("iframe")[0].contentWindow.$._tree;
 			var body = $.modal.getChildFrame(index);
@@ -222,6 +281,14 @@
 		}
 
 		$(function() {
+            // 加载部门列表
+            loadDeptList();
+            // 监听部门选择框变化，刷新岗位列表
+            $("#treeId").on('change', function() {
+                loadPostsByDept();
+            });
+            // 初始加载岗位
+            loadPostsByDept();
             $('#post').select2({
                 placeholder: "请选择岗位",
                 allowClear: true

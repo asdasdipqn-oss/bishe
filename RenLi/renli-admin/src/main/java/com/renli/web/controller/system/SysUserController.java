@@ -1,5 +1,6 @@
 package com.renli.web.controller.system;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.ArrayUtils;
@@ -18,6 +19,7 @@ import com.renli.common.annotation.Log;
 import com.renli.common.constant.UserConstants;
 import com.renli.common.core.controller.BaseController;
 import com.renli.common.core.domain.AjaxResult;
+import com.renli.common.core.domain.entity.SysDept;
 import com.renli.common.core.domain.entity.SysRole;
 import com.renli.common.core.domain.entity.SysUser;
 import com.renli.common.core.page.TableDataInfo;
@@ -142,6 +144,16 @@ public class SysUserController extends BaseController
         user.setPassword(passwordService.encryptPassword(user.getLoginName(), user.getPassword(), user.getSalt()));
         user.setCreateBy(getLoginName());
         return toAjax(userService.insertUser(user));
+    }
+
+    /**
+     * 获取部门列表
+     */
+    @GetMapping("/deptList")
+    @ResponseBody
+    public AjaxResult deptList()
+    {
+        return success(new ArrayList<SysDept>());
     }
 
     /**
